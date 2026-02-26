@@ -788,8 +788,7 @@
         // INICIALIZAR SUPABASE
         const SUPABASE_URL = 'https://xhbwlgqlvqqxagpdnsqk.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhoYndsZ3FsdnFxeGFncGRuc3FrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5Nzg5NTEsImV4cCI6MjA4NzU1NDk1MX0.9K6JPZ205aM9u0zCDDriw1y6MQy2bhhOCdTECFNa1Ig';
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        
+        const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         // Variables globales
         let currentRating = 0;
         let selectedFile = null;
@@ -891,7 +890,7 @@
                 if (selectedFile) {
                     const fileName = `opiniones/${Date.now()}-${selectedFile.name}`;
                     
-                    const { error: uploadError } = await supabase.storage
+                    const { error: uploadError } = await client.storage
                         .from('opiniones-imagenes')
                         .upload(fileName, selectedFile, {
                             cacheControl: '3600',
@@ -900,14 +899,14 @@
                     
                     if (uploadError) throw uploadError;
                     
-                    const { data: { publicUrl } } = supabase.storage
+                    const { data: { publicUrl } } = client.storage
                         .from('opiniones-imagenes')
                         .getPublicUrl(fileName);
                     
                     imagenUrl = publicUrl;
                 }
                 
-                const { error } = await supabase
+                const { error } = await client
                     .from('opiniones')
                     .insert([
                         {
@@ -1039,6 +1038,7 @@
     </script>
 </body>
 </html>
+
 
 
 
