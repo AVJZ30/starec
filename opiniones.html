@@ -140,10 +140,10 @@
             width: 100%;
         }
         
-        /* HERO DE OPINIONES */
+        /* HERO DE OPINIONES - TÍTULO GRANDE Y VISIBLE */
         .opiniones-hero {
             margin-top: 100px;
-            padding: 60px 10% 40px;
+            padding: 80px 10% 60px;
             text-align: center;
             background: linear-gradient(135deg, var(--rosa-polvo), var(--azul-suave));
             position: relative;
@@ -155,7 +155,7 @@
             position: absolute;
             top: 20px;
             left: 20px;
-            font-size: 60px;
+            font-size: 80px;
             opacity: 0.2;
             transform: rotate(-15deg);
         }
@@ -165,22 +165,23 @@
             position: absolute;
             bottom: 20px;
             right: 20px;
-            font-size: 60px;
+            font-size: 80px;
             opacity: 0.2;
             transform: rotate(15deg);
         }
         
         .opiniones-hero h1 {
-            font-size: 56px;
+            font-size: 64px;
             margin-bottom: 20px;
             color: var(--blanco);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
             position: relative;
             z-index: 2;
+            letter-spacing: 2px;
         }
         
         .opiniones-hero p {
-            font-size: 20px;
+            font-size: 22px;
             color: var(--blanco);
             font-weight: 300;
             max-width: 600px;
@@ -215,7 +216,7 @@
         }
         
         .formulario-section h2 {
-            font-size: 32px;
+            font-size: 36px;
             margin-bottom: 30px;
             color: var(--texto-oscuro);
             position: relative;
@@ -427,7 +428,7 @@
         }
         
         .lista-section h2 {
-            font-size: 32px;
+            font-size: 36px;
             margin-bottom: 30px;
             color: var(--texto-oscuro);
             position: relative;
@@ -524,6 +525,7 @@
         
         .opinion-imagen:hover {
             transform: scale(1.05);
+            box-shadow: 0 10px 20px var(--sombra-rosa);
         }
         
         .opinion-imagen img {
@@ -544,7 +546,7 @@
             margin-bottom: 20px;
         }
         
-        /* MODAL PARA VER IMAGEN GRANDE */
+        /* MODAL PARA VER IMAGEN GRANDE - CORREGIDO */
         .modal {
             display: none;
             position: fixed;
@@ -552,10 +554,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             z-index: 2000;
             justify-content: center;
             align-items: center;
+            cursor: pointer;
         }
         
         .modal.show {
@@ -565,26 +568,43 @@
         .modal-content {
             max-width: 90%;
             max-height: 90%;
+            position: relative;
+            animation: zoomIn 0.3s ease;
+        }
+        
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
         
         .modal-content img {
             width: 100%;
             height: auto;
             border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
         
         .modal-close {
             position: absolute;
             top: 20px;
-            right: 20px;
+            right: 30px;
             color: white;
-            font-size: 40px;
+            font-size: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
+            z-index: 2001;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
         
         .modal-close:hover {
-            transform: scale(1.1);
+            transform: scale(1.2);
+            color: var(--rosa-suave);
         }
         
         /* BOTÓN FLOTANTE PARA SUBIR RÁPIDO */
@@ -623,7 +643,11 @@
             }
             
             .opiniones-hero h1 {
-                font-size: 36px;
+                font-size: 42px;
+            }
+            
+            .opiniones-hero p {
+                font-size: 18px;
             }
             
             .rating-stars {
@@ -643,6 +667,10 @@
             .formulario-section,
             .lista-section {
                 padding: 30px 20px;
+            }
+            
+            .opiniones-hero h1 {
+                font-size: 36px;
             }
         }
     </style>
@@ -664,9 +692,9 @@
         </nav>
     </header>
     
-    <!-- HERO DE OPINIONES -->
+    <!-- HERO DE OPINIONES - TÍTULO GRANDE Y LLAMATIVO -->
     <section class="opiniones-hero" data-aos="fade-down">
-        <h1>✨ Opiniones de nuestras clientas ✨</h1>
+        <h1>✨ Opiniones ⭐ ✨</h1>
         <p>Comparte tu experiencia con Star Ec</p>
     </section>
     
@@ -674,16 +702,16 @@
     <div class="opiniones-container">
         <!-- FORMULARIO PARA DEJAR OPINIÓN -->
         <div class="formulario-section" data-aos="fade-right">
-            <h2>Deja tu opinión</h2>
+            <h2>✨ Deja tu opinión ✨</h2>
             
             <form id="opinionForm">
                 <div class="form-group">
-                    <label for="nombre">Tu nombre</label>
+                    <label for="nombre"><i class="fa-regular fa-user"></i> Tu nombre</label>
                     <input type="text" id="nombre" name="nombre" placeholder="Ej: María González" required>
                 </div>
                 
                 <div class="form-group">
-                    <label>Tu calificación</label>
+                    <label><i class="fa-regular fa-star"></i> Tu calificación</label>
                     <div class="rating-container">
                         <div class="rating-stars" id="ratingStars">
                             <i class="fa-regular fa-star" data-rating="1"></i>
@@ -697,15 +725,15 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="comentario">Tu opinión</label>
+                    <label for="comentario"><i class="fa-regular fa-message"></i> Tu opinión</label>
                     <textarea id="comentario" name="comentario" rows="4" placeholder="Cuéntanos qué te parecieron nuestros alfajores..." required></textarea>
                 </div>
                 
                 <div class="form-group">
-                    <label>Sube una foto (opcional)</label>
+                    <label><i class="fa-regular fa-image"></i> Sube una foto (opcional)</label>
                     <div class="file-upload">
                         <label for="imagen" class="file-upload-label">
-                            <i class="fa-regular fa-image"></i>
+                            <i class="fa-regular fa-camera"></i>
                             <span>Elegir imagen</span>
                         </label>
                         <input type="file" id="imagen" name="imagen" accept="image/*">
@@ -731,7 +759,7 @@
         
         <!-- LISTA DE OPINIONES -->
         <div class="lista-section" data-aos="fade-left">
-            <h2>Lo que dicen nuestras clientas</h2>
+            <h2>⭐ Lo que dicen nuestras clientas ⭐</h2>
             
             <div class="opiniones-grid" id="opinionesList">
                 <!-- Las opiniones se cargarán aquí dinámicamente -->
@@ -748,17 +776,16 @@
         <i class="fa-regular fa-pen-to-square"></i>
     </div>
     
-    <!-- MODAL PARA VER IMAGEN GRANDE -->
-    <div class="modal" id="imageModal">
-        <span class="modal-close" onclick="closeModal()">&times;</span>
-        <div class="modal-content">
+    <!-- MODAL PARA VER IMAGEN GRANDE - CORREGIDO -->
+    <div class="modal" id="imageModal" onclick="closeModal()">
+        <span class="modal-close" onclick="event.stopPropagation(); closeModal()">&times;</span>
+        <div class="modal-content" onclick="event.stopPropagation()">
             <img src="" alt="Imagen grande" id="modalImage">
         </div>
     </div>
     
     <script>
         // INICIALIZAR SUPABASE
-        // ⚠️ IMPORTANTE: Reemplaza con tus credenciales de Supabase
         const SUPABASE_URL = 'https://xhbwlgqlvqqxagpdnsqk.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhoYndsZ3FsdnFxeGFncGRuc3FrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5Nzg5NTEsImV4cCI6MjA4NzU1NDk1MX0.9K6JPZ205aM9u0zCDDriw1y6MQy2bhhOCdTECFNa1Ig';
         const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -821,7 +848,6 @@
                 selectedFile = file;
                 fileName.textContent = file.name;
                 
-                // Mostrar vista previa si es imagen
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     previewImg.src = e.target.result;
@@ -843,7 +869,6 @@
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            // Validaciones
             if (currentRating === 0) {
                 showMessage('Por favor selecciona una calificación', 'error');
                 return;
@@ -863,11 +888,10 @@
             try {
                 let imagenUrl = null;
                 
-                // Subir imagen si existe
                 if (selectedFile) {
                     const fileName = `opiniones/${Date.now()}-${selectedFile.name}`;
                     
-                    const { data: uploadData, error: uploadError } = await supabase.storage
+                    const { error: uploadError } = await supabase.storage
                         .from('opiniones-imagenes')
                         .upload(fileName, selectedFile, {
                             cacheControl: '3600',
@@ -876,7 +900,6 @@
                     
                     if (uploadError) throw uploadError;
                     
-                    // Obtener URL pública
                     const { data: { publicUrl } } = supabase.storage
                         .from('opiniones-imagenes')
                         .getPublicUrl(fileName);
@@ -884,8 +907,7 @@
                     imagenUrl = publicUrl;
                 }
                 
-                // Guardar opinión en la base de datos
-                const { data, error } = await supabase
+                const { error } = await supabase
                     .from('opiniones')
                     .insert([
                         {
@@ -899,7 +921,6 @@
                 
                 if (error) throw error;
                 
-                // Éxito
                 showMessage('¡Gracias por tu opinión!', 'success');
                 form.reset();
                 currentRating = 0;
@@ -908,7 +929,6 @@
                 fileName.textContent = 'Ningún archivo seleccionado';
                 imagePreview.classList.remove('show');
                 
-                // Recargar opiniones
                 cargarOpiniones();
                 
             } catch (error) {
@@ -920,17 +940,15 @@
             }
         });
         
-        // MOSTRAR MENSAJES
         function showMessage(text, type) {
             messageDiv.textContent = text;
             messageDiv.className = `message ${type} show`;
-            
             setTimeout(() => {
                 messageDiv.classList.remove('show');
             }, 5000);
         }
         
-        // CARGAR OPINIONES DESDE SUPABASE
+        // CARGAR OPINIONES
         async function cargarOpiniones() {
             const opinionesList = document.getElementById('opinionesList');
             
@@ -964,7 +982,7 @@
                         </div>
                         <p class="opinion-texto">${op.comentario}</p>
                         ${op.imagen_url ? `
-                            <div class="opinion-imagen" onclick="openModal('${op.imagen_url}')">
+                            <div class="opinion-imagen" onclick="abrirModal('${op.imagen_url}')">
                                 <img src="${op.imagen_url}" alt="Foto de opinión">
                             </div>
                         ` : ''}
@@ -982,17 +1000,19 @@
             }
         }
         
-        // MODAL PARA IMAGENES
-        function openModal(imageUrl) {
+        // MODAL PARA IMAGENES - CORREGIDO
+        function abrirModal(imageUrl) {
             const modal = document.getElementById('imageModal');
             const modalImg = document.getElementById('modalImage');
             modalImg.src = imageUrl;
             modal.classList.add('show');
+            document.body.style.overflow = 'hidden'; // Evita scroll detrás del modal
         }
         
         function closeModal() {
             const modal = document.getElementById('imageModal');
             modal.classList.remove('show');
+            document.body.style.overflow = ''; // Restaura scroll
         }
         
         // SCROLL AL FORMULARIO
@@ -1012,13 +1032,10 @@
             }
         });
         
-        // Cerrar modal haciendo clic fuera
-        document.getElementById('imageModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
+        // Hacer funciones globales para que funcionen desde onclick
+        window.abrirModal = abrirModal;
+        window.closeModal = closeModal;
+        window.scrollToForm = scrollToForm;
     </script>
 </body>
-
 </html>
