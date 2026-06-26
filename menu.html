@@ -16,32 +16,38 @@
     
     <style>
         :root {
-            --celeste-claro: #E0F4F7;
-            --celeste-suave: #C5EDF2;
-            --celeste-medio: #8DD8E5;
-            --celeste-vivo: #5CC8D6;
-            --celeste-intenso: #3AB0BF;
-            --celeste-profundo: #1A8A96;
-            --cafe-claro: #F0E4D4;
-            --cafe-suave: #E2CFB5;
+            /* Celestes */
+            --celeste-claro: #E0F7FA;
+            --celeste-suave: #B2EBF2;
+            --celeste-medio: #80DEEA;
+            --celeste-vivo: #4DD0E1;
+            --celeste-intenso: #00BCD4;
+            --celeste-profundo: #0097A7;
+            
+            /* Cafés */
+            --cafe-claro: #F5E6D3;
+            --cafe-suave: #E8D5B7;
             --cafe-medio: #C9A87C;
             --cafe-vivo: #B8894A;
             --cafe-intenso: #9E7230;
-            --cafe-profundo: #7A5620;
-            --cafe-oscuro: #5C3D18;
-            --amarillo-suave: #FFF8E1;
-            --amarillo-claro: #FFF0B3;
-            --amarillo-mantequilla: #FFE57F;
-            --amarillo-dorado: #FFC107;
-            --amarillo-intenso: #FFA000;
+            --cafe-profundo: #7B5B3A;
+            --cafe-oscuro: #5C3D1E;
+            
+            /* Amarillos */
+            --amarillo-claro: #FFF9C4;
+            --amarillo-suave: #FFF176;
+            --amarillo-dorado: #FFD600;
+            --amarillo-intenso: #FFC107;
+            --amarillo-brillante: #FFAB00;
+            
             --blanco: #FFFFFF;
             --blanco-roto: #FFFDF9;
             --gris-claro: #F8F5F0;
             --texto-oscuro: #3E2F1C;
             --texto-medio: #6B5D4A;
-            --sombra-suave: 0 8px 32px rgba(90, 60, 30, 0.08);
-            --sombra-media: 0 12px 40px rgba(90, 60, 30, 0.12);
-            --sombra-celeste: 0 10px 30px rgba(26, 138, 150, 0.2);
+            --sombra-cafe: 0 8px 32px rgba(123, 91, 58, 0.1);
+            --sombra-celeste: 0 8px 32px rgba(0, 151, 167, 0.1);
+            --sombra-amarilla: 0 8px 32px rgba(255, 171, 0, 0.15);
             --borde-redondo: 24px;
             --transicion: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
@@ -66,7 +72,7 @@
             letter-spacing: -0.3px;
         }
         
-        /* HEADER */
+        /* HEADER - CAFÉ */
         header {
             position: fixed;
             top: 0;
@@ -77,11 +83,11 @@
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 2px 20px rgba(90, 60, 30, 0.06);
-            border-bottom: 1px solid rgba(184, 137, 74, 0.15);
+            box-shadow: 0 2px 20px rgba(123, 91, 58, 0.08);
+            border-bottom: 2px solid var(--cafe-suave);
         }
         
         .logo-img {
@@ -89,22 +95,16 @@
             height: 55px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2.5px solid var(--celeste-medio);
-            box-shadow: 0 0 18px rgba(92, 200, 214, 0.35);
+            border: 3px solid var(--cafe-medio);
+            box-shadow: 0 0 20px rgba(184, 137, 74, 0.3);
             transition: var(--transicion);
             background: white;
             padding: 2px;
-            animation: logoGlow 3s ease-in-out infinite;
-        }
-        
-        @keyframes logoGlow {
-            0%, 100% { box-shadow: 0 0 18px rgba(92, 200, 214, 0.35); }
-            50% { box-shadow: 0 0 30px rgba(255, 193, 7, 0.55); }
         }
         
         .logo-img:hover {
             transform: scale(1.1) rotate(-3deg);
-            border-color: var(--amarillo-dorado);
+            border-color: var(--cafe-vivo);
         }
         
         .nav-menu {
@@ -114,8 +114,8 @@
         
         .nav-menu a {
             text-decoration: none;
-            color: var(--cafe-intenso);
-            font-weight: 500;
+            color: var(--cafe-profundo);
+            font-weight: 600;
             font-size: 15px;
             letter-spacing: 0.4px;
             transition: var(--transicion);
@@ -130,25 +130,25 @@
             left: 0;
             width: 0;
             height: 2.5px;
-            background: linear-gradient(90deg, var(--celeste-vivo), var(--amarillo-dorado));
+            background: var(--cafe-vivo);
             transition: width 0.35s cubic-bezier(0.68, -0.55, 0.27, 1.55);
             border-radius: 10px;
         }
         
         .nav-menu a:hover, .nav-menu a.active {
-            color: var(--celeste-intenso);
+            color: var(--cafe-vivo);
         }
         
         .nav-menu a:hover::after, .nav-menu a.active::after {
             width: 100%;
         }
         
-        /* HERO DEL MENÚ */
+        /* HERO DEL MENÚ - CELESTE */
         .menu-hero {
             margin-top: 87px;
             padding: 70px 10% 50px;
             text-align: center;
-            background: linear-gradient(135deg, var(--celeste-claro) 0%, var(--cafe-claro) 50%, var(--amarillo-suave) 100%);
+            background: var(--celeste-claro);
             position: relative;
             overflow: hidden;
         }
@@ -160,8 +160,9 @@
             right: -80px;
             width: 280px;
             height: 280px;
-            background: radial-gradient(circle, rgba(255, 193, 7, 0.2) 0%, transparent 70%);
+            background: var(--celeste-suave);
             border-radius: 50%;
+            opacity: 0.6;
             animation: floatSlow 6s ease-in-out infinite;
         }
         
@@ -172,8 +173,9 @@
             left: -60px;
             width: 220px;
             height: 220px;
-            background: radial-gradient(circle, rgba(92, 200, 214, 0.2) 0%, transparent 70%);
+            background: var(--celeste-medio);
             border-radius: 50%;
+            opacity: 0.4;
             animation: floatSlow 8s ease-in-out infinite reverse;
         }
         
@@ -185,32 +187,25 @@
         .menu-hero h1 {
             font-size: 58px;
             margin-bottom: 18px;
-            color: var(--cafe-profundo);
+            color: var(--celeste-profundo);
             position: relative;
             z-index: 2;
             font-weight: 700;
         }
         
-        .menu-hero h1 span {
-            background: linear-gradient(135deg, var(--celeste-intenso), var(--cafe-vivo));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
         .menu-hero p {
             font-size: 19px;
-            color: var(--texto-medio);
-            font-weight: 500;
+            color: var(--celeste-intenso);
+            font-weight: 600;
             max-width: 600px;
             margin: 0 auto;
             position: relative;
             z-index: 2;
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.8);
             padding: 14px 32px;
             border-radius: 50px;
             backdrop-filter: blur(8px);
-            border: 1px solid rgba(184, 137, 74, 0.2);
+            border: 2px solid var(--celeste-suave);
             letter-spacing: 0.5px;
         }
         
@@ -221,7 +216,7 @@
             margin: 0 auto;
         }
         
-        /* TABS */
+        /* TABS - CAFÉ */
         .menu-tabs {
             display: flex;
             justify-content: center;
@@ -232,9 +227,9 @@
         
         .tab-btn {
             padding: 13px 30px;
-            border: 2px solid var(--celeste-suave);
+            border: 2px solid var(--cafe-suave);
             background: var(--blanco);
-            color: var(--cafe-intenso);
+            color: var(--cafe-profundo);
             font-family: 'Quicksand', sans-serif;
             font-weight: 600;
             font-size: 15px;
@@ -247,16 +242,16 @@
         
         .tab-btn:hover {
             transform: translateY(-3px);
-            box-shadow: var(--sombra-celeste);
-            border-color: var(--celeste-vivo);
-            background: var(--celeste-claro);
+            box-shadow: var(--sombra-cafe);
+            border-color: var(--cafe-vivo);
+            background: var(--cafe-claro);
         }
         
         .tab-btn.active {
-            background: linear-gradient(135deg, var(--celeste-vivo), var(--cafe-vivo));
+            background: var(--cafe-vivo);
             color: white;
             border-color: transparent;
-            box-shadow: 0 8px 25px rgba(92, 200, 214, 0.4);
+            box-shadow: 0 8px 25px rgba(184, 137, 74, 0.4);
         }
         
         /* TÍTULO DE SECCIÓN */
@@ -275,7 +270,7 @@
             left: 0;
             width: 55px;
             height: 3px;
-            background: linear-gradient(90deg, var(--celeste-vivo), var(--amarillo-dorado));
+            background: var(--cafe-vivo);
             border-radius: 4px;
         }
         
@@ -287,44 +282,28 @@
             margin-bottom: 35px;
         }
         
-        /* TARJETA */
+        /* TARJETA - CAFÉ */
         .menu-item {
             background: var(--blanco);
             border-radius: var(--borde-redondo);
             overflow: hidden;
-            box-shadow: 0 8px 28px rgba(90, 60, 30, 0.07);
+            box-shadow: var(--sombra-cafe);
             transition: var(--transicion);
             position: relative;
-            border: 2px solid transparent;
-        }
-        
-        .menu-item::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: var(--borde-redondo);
-            padding: 2px;
-            background: linear-gradient(135deg, var(--celeste-vivo), var(--cafe-vivo), var(--amarillo-dorado));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask-composite: exclude;
-            opacity: 0;
-            transition: opacity 0.4s ease;
+            border: 2px solid var(--cafe-suave);
         }
         
         .menu-item:hover {
             transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(26, 138, 150, 0.18);
-        }
-        
-        .menu-item:hover::before {
-            opacity: 1;
+            box-shadow: 0 25px 50px rgba(123, 91, 58, 0.18);
+            border-color: var(--cafe-medio);
         }
         
         .menu-item-image {
             height: 210px;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, var(--celeste-claro), var(--cafe-claro));
+            background: var(--cafe-claro);
         }
         
         .menu-item-image img {
@@ -363,10 +342,7 @@
         .menu-item-price {
             font-size: 28px;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--celeste-intenso), var(--cafe-vivo));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--cafe-vivo);
             margin-bottom: 18px;
             font-family: 'Cormorant Garamond', serif;
         }
@@ -378,7 +354,7 @@
             gap: 10px;
             width: 100%;
             padding: 13px 20px;
-            background: linear-gradient(135deg, #25D366, #128C7E);
+            background: #25D366;
             color: white;
             border: none;
             border-radius: 50px;
@@ -401,7 +377,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.25), transparent);
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
             transform: rotate(45deg);
             animation: btnShine 3s infinite;
         }
@@ -412,19 +388,20 @@
         }
         
         .whatsapp-btn:hover {
+            background: #128C7E;
             transform: translateY(-4px);
             box-shadow: 0 14px 30px rgba(37, 211, 102, 0.5);
         }
         
-        /* CAJAS SECTION */
+        /* CAJAS SECTION - AMARILLO */
         .cajas-section {
             margin: 60px 0;
             padding: 50px 40px;
-            background: linear-gradient(135deg, var(--celeste-claro), var(--cafe-claro), var(--amarillo-suave));
+            background: var(--amarillo-claro);
             border-radius: 36px;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(184, 137, 74, 0.2);
+            border: 2px solid var(--amarillo-suave);
         }
         
         .cajas-section::before {
@@ -434,12 +411,13 @@
             right: -50px;
             width: 200px;
             height: 200px;
-            background: radial-gradient(circle, rgba(255, 193, 7, 0.25) 0%, transparent 70%);
+            background: var(--amarillo-suave);
             border-radius: 50%;
+            opacity: 0.5;
         }
         
         .cajas-section h2 {
-            color: var(--cafe-profundo);
+            color: var(--cafe-oscuro);
             font-size: 38px;
             margin-bottom: 35px;
             position: relative;
@@ -455,27 +433,27 @@
         }
         
         .caja-card {
-            background: rgba(255, 255, 255, 0.75);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-radius: 28px;
             padding: 34px 24px;
             text-align: center;
-            border: 2px solid rgba(255, 255, 255, 0.7);
+            border: 2px solid white;
             transition: var(--transicion);
-            box-shadow: 0 6px 20px rgba(90, 60, 30, 0.06);
+            box-shadow: var(--sombra-amarilla);
         }
         
         .caja-card:hover {
             transform: translateY(-6px) scale(1.03);
-            border-color: var(--celeste-medio);
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: var(--sombra-celeste);
+            border-color: var(--amarillo-dorado);
+            background: white;
+            box-shadow: 0 20px 50px rgba(255, 171, 0, 0.25);
         }
         
         .caja-icon {
             font-size: 42px;
-            color: var(--cafe-vivo);
+            color: var(--amarillo-brillante);
             margin-bottom: 16px;
         }
         
@@ -493,32 +471,32 @@
         }
         
         .caja-card .whatsapp-btn {
-            background: linear-gradient(135deg, var(--celeste-vivo), var(--cafe-vivo));
-            box-shadow: 0 6px 18px rgba(92, 200, 214, 0.35);
+            background: var(--amarillo-dorado);
+            color: var(--cafe-oscuro);
+            box-shadow: 0 6px 18px rgba(255, 214, 0, 0.35);
         }
         
         .caja-card .whatsapp-btn:hover {
-            box-shadow: 0 12px 28px rgba(92, 200, 214, 0.55);
+            background: var(--amarillo-brillante);
+            color: white;
+            box-shadow: 0 12px 28px rgba(255, 171, 0, 0.5);
         }
         
-        /* MIX SECTION */
+        /* MIX SECTION - CELESTE */
         .mix-section {
             margin: 60px 0;
             padding: 50px 40px;
             background: var(--blanco);
             border-radius: 36px;
-            box-shadow: 0 15px 45px rgba(26, 138, 150, 0.12);
+            box-shadow: var(--sombra-celeste);
             text-align: center;
-            border: 1px solid rgba(184, 137, 74, 0.15);
+            border: 2px solid var(--celeste-suave);
         }
         
         .mix-section h2 {
             font-size: 38px;
             margin-bottom: 35px;
-            background: linear-gradient(135deg, var(--celeste-intenso), var(--cafe-vivo));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--celeste-profundo);
         }
         
         .mix-options {
@@ -531,11 +509,11 @@
         
         .mix-option {
             padding: 28px 42px;
-            background: var(--gris-claro);
+            background: var(--celeste-claro);
             border-radius: 50px;
             font-size: 19px;
             font-weight: 600;
-            color: var(--cafe-profundo);
+            color: var(--celeste-profundo);
             border: 2px solid var(--celeste-suave);
             transition: var(--transicion);
             box-shadow: 0 4px 15px rgba(90, 60, 30, 0.05);
@@ -550,10 +528,7 @@
         }
         
         .mix-option .price {
-            background: linear-gradient(135deg, var(--celeste-intenso), var(--cafe-vivo));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--celeste-intenso);
             font-size: 26px;
             margin-left: 8px;
             font-weight: 700;
@@ -566,7 +541,7 @@
             right: 30px;
             width: 68px;
             height: 68px;
-            background: linear-gradient(135deg, #25D366, #128C7E);
+            background: #25D366;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -588,6 +563,7 @@
         }
         
         .whatsapp-float:hover {
+            background: #128C7E;
             transform: scale(1.12) rotate(8deg);
             box-shadow: 0 18px 45px rgba(37, 211, 102, 0.65);
             animation: none;
@@ -623,7 +599,7 @@
     </header>
     
     <section class="menu-hero" data-aos="fade-down">
-        <h1>✨ <span>MENÚ STAR</span> ✨</h1>
+        <h1>✨ MENÚ STAR ✨</h1>
         <p>ARMA TU CAJA CON TUS FAVORITOS</p>
     </section>
     
