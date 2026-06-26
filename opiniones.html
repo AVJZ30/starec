@@ -5,35 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Opiniones Star Ec ✨</title>
     
-    <!-- Fuentes de Google -->
+    <link rel="icon" type="image/x-icon" href="https://i.pinimg.com/736x/91/9f/9b/919f9b2e3741cb959edb5541803f90fe.jpg">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Librería para animaciones AOS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <!-- Font Awesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Supabase JS Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
-        /* Variables de color - PALETA STAR EC */
         :root {
-            --rosa-suave: #FFB6C1;
-            --rosa-polvo: #F8C8D8;
-            --rosa-medio: #FF9EB5;
-            --azul-cielo: #AED9E0;
-            --azul-suave: #B8E2F0;
-            --azul-medio: #9AC7D1;
+            /* Celestes */
+            --celeste-claro: #E0F7FA;
+            --celeste-suave: #B2EBF2;
+            --celeste-medio: #80DEEA;
+            --celeste-vivo: #4DD0E1;
+            --celeste-intenso: #00BCD4;
+            --celeste-profundo: #0097A7;
+            
+            /* Cafés */
+            --cafe-claro: #F5E6D3;
+            --cafe-suave: #E8D5B7;
+            --cafe-medio: #C9A87C;
+            --cafe-vivo: #B8894A;
+            --cafe-intenso: #9E7230;
+            --cafe-profundo: #7B5B3A;
+            --cafe-oscuro: #5C3D1E;
+            
+            /* Amarillos */
+            --amarillo-claro: #FFF9C4;
+            --amarillo-suave: #FFF176;
+            --amarillo-dorado: #FFD600;
+            --amarillo-intenso: #FFC107;
+            --amarillo-brillante: #FFAB00;
+            
             --blanco: #FFFFFF;
-            --blanco-roto: #FFF9F9;
-            --texto-oscuro: #4A4A4A;
-            --texto-gris: #666;
-            --sombra: rgba(0, 0, 0, 0.05);
-            --sombra-rosa: rgba(255, 182, 193, 0.3);
+            --blanco-roto: #FFFDF9;
+            --texto-oscuro: #3E2F1C;
+            --texto-medio: #6B5D4A;
+            --sombra-cafe: 0 8px 32px rgba(123, 91, 58, 0.1);
+            --sombra-celeste: 0 8px 32px rgba(0, 151, 167, 0.1);
+            --sombra-amarilla: 0 8px 32px rgba(255, 171, 0, 0.15);
+            --borde-redondo: 24px;
+            --transicion: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
         * {
@@ -43,182 +60,188 @@
         }
         
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Raleway', sans-serif;
             background-color: var(--blanco-roto);
             color: var(--texto-oscuro);
             overflow-x: hidden;
+            line-height: 1.6;
         }
         
         h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cormorant Garamond', serif;
             font-weight: 600;
+            letter-spacing: -0.3px;
         }
         
-        /* HEADER - MENÚ PRINCIPAL */
+        /* HEADER - CAFÉ */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            padding: 20px 5%;
+            padding: 16px 6%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 10000;
-            transition: all 0.4s ease;
-            background-color: var(--blanco);
-            box-shadow: 0 5px 20px var(--sombra);
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 2px 20px rgba(123, 91, 58, 0.08);
+            border-bottom: 2px solid var(--cafe-suave);
         }
         
-        /* ESPACIO PARA EL LOGO */
-        .logo {
-            width: 60px;
-            height: 60px;
+        .logo-img {
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--rosa-suave), var(--azul-cielo));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 24px;
-            color: var(--blanco);
-            box-shadow: 0 4px 15px var(--sombra-rosa);
-            transition: transform 0.3s ease;
-            text-decoration: none;
+            object-fit: cover;
+            border: 3px solid var(--cafe-medio);
+            box-shadow: 0 0 20px rgba(184, 137, 74, 0.3);
+            transition: var(--transicion);
+            background: white;
+            padding: 2px;
         }
         
-        .logo:hover {
-            transform: scale(1.05);
+        .logo-img:hover {
+            transform: scale(1.1) rotate(-3deg);
+            border-color: var(--cafe-vivo);
         }
         
-        .logo span {
-            font-size: 14px;
-            margin-left: 2px;
-        }
-        
-        /* Menú de navegación */
         .nav-menu {
             display: flex;
-            gap: 40px;
+            gap: 35px;
         }
         
         .nav-menu a {
             text-decoration: none;
-            color: var(--texto-oscuro);
-            font-weight: 500;
-            font-size: 16px;
-            letter-spacing: 0.5px;
-            transition: color 0.3s ease;
+            color: var(--cafe-profundo);
+            font-weight: 600;
+            font-size: 15px;
+            letter-spacing: 0.4px;
+            transition: var(--transicion);
             position: relative;
+            font-family: 'Quicksand', sans-serif;
         }
         
         .nav-menu a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -6px;
             left: 0;
             width: 0;
-            height: 2px;
-            background: linear-gradient(to right, var(--rosa-suave), var(--azul-cielo));
-            transition: width 0.3s ease;
+            height: 2.5px;
+            background: var(--cafe-vivo);
+            transition: width 0.35s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            border-radius: 10px;
         }
         
-        .nav-menu a:hover {
-            color: var(--rosa-suave);
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--cafe-vivo);
         }
         
-        .nav-menu a:hover::after {
+        .nav-menu a:hover::after, .nav-menu a.active::after {
             width: 100%;
         }
         
-        .nav-menu a.active {
-            color: var(--rosa-suave);
-        }
-        
-        .nav-menu a.active::after {
-            width: 100%;
-        }
-        
-        /* HERO DE OPINIONES - TÍTULO GRANDE Y VISIBLE */
+        /* HERO DE OPINIONES - CELESTE */
         .opiniones-hero {
-            margin-top: 120px;
+            margin-top: 87px;
             padding: 80px 10% 60px;
             text-align: center;
-            background: linear-gradient(135deg, var(--rosa-polvo), var(--azul-suave));
+            background: var(--celeste-claro);
             position: relative;
             overflow: hidden;
         }
         
         .opiniones-hero::before {
-            content: '💬';
+            content: '';
             position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 80px;
-            opacity: 0.2;
-            transform: rotate(-15deg);
+            top: -60px;
+            right: -60px;
+            width: 250px;
+            height: 250px;
+            background: var(--celeste-suave);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: floatBubble 6s ease-in-out infinite;
         }
         
         .opiniones-hero::after {
-            content: '⭐';
+            content: '';
             position: absolute;
-            bottom: 20px;
-            right: 20px;
-            font-size: 80px;
-            opacity: 0.2;
-            transform: rotate(15deg);
+            bottom: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: var(--celeste-medio);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: floatBubble 8s ease-in-out infinite reverse;
+        }
+        
+        @keyframes floatBubble {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-25px, -20px) scale(1.1); }
         }
         
         .opiniones-hero h1 {
             font-size: 64px;
-            margin-bottom: 20px;
-            color: var(--blanco);
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+            margin-bottom: 18px;
+            color: var(--celeste-profundo);
+            text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.6);
             position: relative;
             z-index: 2;
-            letter-spacing: 2px;
+            font-weight: 700;
         }
         
         .opiniones-hero p {
-            font-size: 22px;
-            color: var(--blanco);
-            font-weight: 300;
-            max-width: 600px;
+            font-size: 20px;
+            color: var(--celeste-intenso);
+            font-weight: 600;
+            max-width: 550px;
             margin: 0 auto;
             position: relative;
             z-index: 2;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px 32px;
             border-radius: 50px;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
+            border: 2px solid var(--celeste-suave);
         }
         
         /* CONTENEDOR PRINCIPAL */
         .opiniones-container {
-            padding: 60px 10%;
+            padding: 60px 7%;
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 50px;
+            gap: 45px;
         }
         
-        /* FORMULARIO PARA DEJAR OPINIÓN */
+        /* FORMULARIO - CAFÉ */
         .formulario-section {
             background: var(--blanco);
-            border-radius: 40px;
-            padding: 40px;
-            box-shadow: 0 20px 40px var(--sombra-rosa);
+            border-radius: var(--borde-redondo);
+            padding: 42px 38px;
+            box-shadow: var(--sombra-cafe);
             position: sticky;
-            top: 120px;
+            top: 110px;
             height: fit-content;
+            border: 2px solid var(--cafe-suave);
+            transition: var(--transicion);
+        }
+        
+        .formulario-section:hover {
+            box-shadow: 0 20px 50px rgba(123, 91, 58, 0.2);
+            border-color: var(--cafe-medio);
         }
         
         .formulario-section h2 {
             font-size: 36px;
-            margin-bottom: 30px;
-            color: var(--texto-oscuro);
+            margin-bottom: 28px;
+            color: var(--cafe-profundo);
             position: relative;
             display: inline-block;
         }
@@ -228,104 +251,98 @@
             position: absolute;
             bottom: -10px;
             left: 0;
-            width: 60px;
+            width: 55px;
             height: 3px;
-            background: linear-gradient(to right, var(--rosa-suave), var(--azul-cielo));
-            border-radius: 3px;
+            background: var(--cafe-vivo);
+            border-radius: 4px;
         }
         
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 24px;
         }
         
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--texto-oscuro);
-            font-size: 16px;
+            font-weight: 600;
+            color: var(--cafe-profundo);
+            font-size: 15px;
+            font-family: 'Quicksand', sans-serif;
         }
         
         .form-group input,
         .form-group textarea {
             width: 100%;
             padding: 15px 20px;
-            border: 2px solid var(--rosa-polvo);
-            border-radius: 25px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 16px;
-            transition: all 0.3s ease;
+            border: 2px solid var(--cafe-suave);
+            border-radius: 20px;
+            font-family: 'Raleway', sans-serif;
+            font-size: 15px;
+            transition: var(--transicion);
             background: var(--blanco-roto);
+            color: var(--texto-oscuro);
         }
         
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--rosa-medio);
-            box-shadow: 0 0 0 4px var(--sombra-rosa);
+            border-color: var(--cafe-vivo);
+            box-shadow: 0 0 0 5px rgba(184, 137, 74, 0.12);
+            background: white;
         }
         
-        /* SISTEMA DE ESTRELLAS */
-        .rating-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
+        /* SISTEMA DE ESTRELLAS - AMARILLO */
         .rating-stars {
             display: flex;
-            gap: 10px;
-            font-size: 30px;
+            gap: 8px;
+            font-size: 32px;
             cursor: pointer;
         }
         
         .rating-stars i {
-            color: #ddd;
-            transition: all 0.2s ease;
+            color: #e0e0e0;
+            transition: var(--transicion);
         }
         
         .rating-stars i.active {
-            color: #FFD700;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+            color: var(--amarillo-dorado);
+            text-shadow: 0 0 15px rgba(255, 214, 0, 0.4);
+            animation: starPop 0.3s ease;
+        }
+        
+        @keyframes starPop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
         }
         
         .rating-stars i:hover {
-            transform: scale(1.1);
+            transform: scale(1.15);
+            color: var(--amarillo-brillante);
         }
         
-        /* BOTÓN DE SUBIR IMAGEN */
-        .file-upload {
-            position: relative;
-            margin-top: 10px;
-        }
-        
+        /* FILE UPLOAD - CELESTE */
         .file-upload-label {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 15px 25px;
-            background: linear-gradient(135deg, var(--rosa-polvo), var(--azul-suave));
+            padding: 14px 28px;
+            background: var(--celeste-claro);
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transicion);
             width: fit-content;
-            border: 2px dashed var(--rosa-medio);
+            border: 2px dashed var(--celeste-medio);
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            color: var(--celeste-profundo);
         }
         
         .file-upload-label:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px var(--sombra-rosa);
-            background: linear-gradient(135deg, var(--rosa-suave), var(--azul-cielo));
-        }
-        
-        .file-upload-label i {
-            font-size: 20px;
-            color: var(--texto-oscuro);
-        }
-        
-        .file-upload-label span {
-            font-weight: 500;
-            color: var(--texto-oscuro);
+            transform: translateY(-3px);
+            box-shadow: var(--sombra-celeste);
+            border-color: var(--celeste-vivo);
+            background: var(--celeste-suave);
         }
         
         .file-upload input[type="file"] {
@@ -337,25 +354,22 @@
         
         .file-name {
             margin-top: 10px;
-            font-size: 14px;
-            color: var(--texto-gris);
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            font-size: 13px;
+            color: var(--texto-medio);
         }
         
-        .file-name i {
-            color: var(--rosa-medio);
-        }
-        
-        /* VISTA PREVIA DE LA IMAGEN */
         .image-preview {
-            margin-top: 20px;
-            max-width: 200px;
-            border-radius: 15px;
+            margin-top: 18px;
+            max-width: 180px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 10px 20px var(--sombra);
+            box-shadow: 0 8px 20px rgba(90, 60, 30, 0.1);
             display: none;
+            border: 2px solid var(--celeste-suave);
+        }
+        
+        .image-preview.show {
+            display: block;
         }
         
         .image-preview img {
@@ -364,29 +378,47 @@
             display: block;
         }
         
-        .image-preview.show {
-            display: block;
-        }
-        
-        /* BOTÓN DE ENVÍO */
+        /* BOTÓN DE ENVÍO - CAFÉ */
         .submit-btn {
             width: 100%;
-            padding: 18px 30px;
-            background: linear-gradient(135deg, var(--rosa-suave), var(--azul-cielo));
-            color: var(--blanco);
+            padding: 17px 30px;
+            background: var(--cafe-vivo);
+            color: white;
             border: none;
             border-radius: 50px;
-            font-weight: 600;
-            font-size: 18px;
+            font-weight: 700;
+            font-size: 17px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-            box-shadow: 0 10px 20px var(--sombra-rosa);
+            transition: var(--transicion);
+            margin-top: 18px;
+            box-shadow: 0 8px 25px rgba(184, 137, 74, 0.35);
+            font-family: 'Quicksand', sans-serif;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            animation: btnShine 3s infinite;
+        }
+        
+        @keyframes btnShine {
+            0% { left: -50%; }
+            100% { left: 150%; }
         }
         
         .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px var(--sombra-rosa);
+            background: var(--cafe-intenso);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(158, 114, 48, 0.5);
         }
         
         .submit-btn:disabled {
@@ -395,42 +427,51 @@
             transform: none;
         }
         
-        /* MENSAJES DE ÉXITO/ERROR */
+        /* MENSAJES */
         .message {
             padding: 15px 20px;
-            border-radius: 25px;
-            margin-top: 20px;
+            border-radius: 20px;
+            margin-top: 18px;
             display: none;
+            font-weight: 500;
+            font-family: 'Quicksand', sans-serif;
         }
         
         .message.show {
             display: block;
+            animation: fadeInUp 0.4s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .message.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
+            background: var(--celeste-claro);
+            color: var(--celeste-profundo);
+            border: 1px solid var(--celeste-medio);
         }
         
         .message.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
+            background: #FFF3E0;
+            color: #BF360C;
+            border: 1px solid var(--amarillo-suave);
         }
         
-        /* LISTA DE OPINIONES */
+        /* LISTA DE OPINIONES - CELESTE */
         .lista-section {
             background: var(--blanco);
-            border-radius: 40px;
-            padding: 40px;
-            box-shadow: 0 20px 40px var(--sombra-rosa);
+            border-radius: var(--borde-redondo);
+            padding: 42px 38px;
+            box-shadow: var(--sombra-celeste);
+            border: 2px solid var(--celeste-suave);
         }
         
         .lista-section h2 {
             font-size: 36px;
-            margin-bottom: 30px;
-            color: var(--texto-oscuro);
+            margin-bottom: 28px;
+            color: var(--celeste-profundo);
             position: relative;
             display: inline-block;
         }
@@ -440,92 +481,101 @@
             position: absolute;
             bottom: -10px;
             left: 0;
-            width: 60px;
+            width: 55px;
             height: 3px;
-            background: linear-gradient(to right, var(--rosa-suave), var(--azul-cielo));
-            border-radius: 3px;
+            background: var(--celeste-vivo);
+            border-radius: 4px;
         }
         
         .opiniones-grid {
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 22px;
             max-height: 800px;
             overflow-y: auto;
-            padding-right: 15px;
+            padding-right: 12px;
         }
         
         .opiniones-grid::-webkit-scrollbar {
-            width: 8px;
+            width: 7px;
         }
         
         .opiniones-grid::-webkit-scrollbar-track {
-            background: var(--rosa-polvo);
+            background: var(--celeste-claro);
             border-radius: 10px;
         }
         
         .opiniones-grid::-webkit-scrollbar-thumb {
-            background: var(--rosa-medio);
+            background: var(--celeste-medio);
             border-radius: 10px;
         }
         
         .opinion-card-lista {
             background: var(--blanco-roto);
-            border-radius: 25px;
-            padding: 25px;
-            box-shadow: 0 5px 15px var(--sombra);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 182, 193, 0.2);
+            border-radius: 22px;
+            padding: 26px;
+            box-shadow: 0 4px 18px rgba(90, 60, 30, 0.06);
+            transition: var(--transicion);
+            border-left: 4px solid var(--celeste-vivo);
+            position: relative;
+            overflow: hidden;
         }
         
         .opinion-card-lista:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px var(--sombra-rosa);
+            transform: translateY(-4px);
+            box-shadow: var(--sombra-celeste);
+            border-left-color: var(--celeste-intenso);
         }
         
         .opinion-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
         
         .opinion-nombre {
-            font-weight: 600;
-            font-size: 18px;
-            color: var(--texto-oscuro);
+            font-weight: 700;
+            font-size: 17px;
+            color: var(--cafe-profundo);
+            font-family: 'Quicksand', sans-serif;
         }
         
         .opinion-fecha {
-            font-size: 14px;
-            color: var(--texto-gris);
+            font-size: 13px;
+            color: var(--texto-medio);
+            background: var(--celeste-claro);
+            padding: 4px 12px;
+            border-radius: 20px;
         }
         
         .opinion-estrellas {
-            color: #FFD700;
-            margin-bottom: 15px;
+            color: var(--amarillo-dorado);
+            margin-bottom: 12px;
             font-size: 16px;
         }
         
         .opinion-texto {
-            color: var(--texto-gris);
-            line-height: 1.6;
-            margin-bottom: 15px;
+            color: var(--texto-medio);
+            line-height: 1.7;
+            margin-bottom: 14px;
             font-size: 15px;
         }
         
         .opinion-imagen {
-            max-width: 150px;
-            border-radius: 15px;
+            max-width: 140px;
+            border-radius: 14px;
             overflow: hidden;
-            margin-top: 15px;
+            margin-top: 14px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transicion);
+            border: 2px solid var(--celeste-suave);
         }
         
         .opinion-imagen:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px var(--sombra-rosa);
+            transform: scale(1.06);
+            box-shadow: var(--sombra-celeste);
+            border-color: var(--celeste-vivo);
         }
         
         .opinion-imagen img {
@@ -537,16 +587,22 @@
         .no-opiniones {
             text-align: center;
             padding: 50px 20px;
-            color: var(--texto-gris);
+            color: var(--texto-medio);
         }
         
         .no-opiniones i {
-            font-size: 60px;
-            color: var(--rosa-polvo);
-            margin-bottom: 20px;
+            font-size: 55px;
+            color: var(--celeste-medio);
+            margin-bottom: 18px;
+            animation: floatIcon 2s ease-in-out infinite;
         }
         
-        /* MODAL PARA VER IMAGEN GRANDE - CORREGIDO */
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        /* MODAL */
         .modal {
             display: none;
             position: fixed;
@@ -554,7 +610,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.92);
             z-index: 2000;
             justify-content: center;
             align-items: center;
@@ -569,25 +625,20 @@
             max-width: 90%;
             max-height: 90%;
             position: relative;
-            animation: zoomIn 0.3s ease;
+            animation: zoomIn 0.35s ease;
         }
         
         @keyframes zoomIn {
-            from {
-                transform: scale(0.8);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
         
         .modal-content img {
             width: 100%;
             height: auto;
-            border-radius: 10px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+            border: 3px solid white;
         }
         
         .modal-close {
@@ -595,94 +646,86 @@
             top: 20px;
             right: 30px;
             color: white;
-            font-size: 50px;
+            font-size: 48px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transicion);
             z-index: 2001;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            text-shadow: 0 2px 12px rgba(0,0,0,0.6);
         }
         
         .modal-close:hover {
-            transform: scale(1.2);
-            color: var(--rosa-suave);
+            transform: scale(1.2) rotate(90deg);
+            color: var(--amarillo-dorado);
         }
         
-        /* BOTÓN FLOTANTE PARA SUBIR RÁPIDO */
+        /* BOTÓN FLOTANTE - AMARILLO */
         .floating-btn {
             position: fixed;
             bottom: 30px;
             left: 30px;
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--rosa-suave), var(--azul-cielo));
+            width: 65px;
+            height: 65px;
+            background: var(--amarillo-dorado);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--blanco);
-            font-size: 30px;
-            box-shadow: 0 10px 30px var(--sombra-rosa);
+            color: var(--cafe-oscuro);
+            font-size: 28px;
+            box-shadow: 0 10px 30px rgba(255, 214, 0, 0.4);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transicion);
             z-index: 999;
-            border: 3px solid var(--blanco);
+            border: 3px solid white;
+            animation: floatBounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes floatBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
         
         .floating-btn:hover {
-            transform: scale(1.1) rotate(5deg);
+            background: var(--amarillo-brillante);
+            color: white;
+            transform: scale(1.12) rotate(8deg);
+            box-shadow: 0 18px 45px rgba(255, 171, 0, 0.5);
+            animation: none;
         }
         
-        /* RESPONSIVE */
         @media (max-width: 968px) {
             .opiniones-container {
                 grid-template-columns: 1fr;
             }
-            
             .formulario-section {
                 position: static;
             }
-            
             .opiniones-hero h1 {
                 font-size: 42px;
-            }
-            
-            .opiniones-hero p {
-                font-size: 18px;
-            }
-            
-            .rating-stars {
-                font-size: 24px;
             }
         }
         
         @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-            
+            .nav-menu { display: none; }
             .opiniones-container {
                 padding: 30px 5%;
             }
-            
             .formulario-section,
             .lista-section {
-                padding: 30px 20px;
+                padding: 28px 20px;
             }
-            
             .opiniones-hero h1 {
-                font-size: 36px;
+                font-size: 34px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- HEADER - MENÚ PRINCIPAL -->
     <header id="header">
-        <a href="index.html" class="logo">
-            S<span>tar</span>
+        <a href="index.html">
+            <img src="https://i.pinimg.com/736x/91/9f/9b/919f9b2e3741cb959edb5541803f90fe.jpg" alt="Star Ec Logo" class="logo-img">
         </a>
         
-        <!-- Menú de navegación -->
         <nav class="nav-menu">
             <a href="index.html">Inicio</a>
             <a href="menu.html">Menú</a>
@@ -692,15 +735,12 @@
         </nav>
     </header>
     
-    <!-- HERO DE OPINIONES - TÍTULO GRANDE Y LLAMATIVO -->
     <section class="opiniones-hero" data-aos="fade-down">
         <h1>✨ Opiniones ⭐ ✨</h1>
         <p>Comparte tu experiencia con Star Ec</p>
     </section>
     
-    <!-- CONTENEDOR PRINCIPAL -->
     <div class="opiniones-container">
-        <!-- FORMULARIO PARA DEJAR OPINIÓN -->
         <div class="formulario-section" data-aos="fade-right">
             <h2>✨ Deja tu opinión ✨</h2>
             
@@ -712,16 +752,14 @@
                 
                 <div class="form-group">
                     <label><i class="fa-regular fa-star"></i> Tu calificación</label>
-                    <div class="rating-container">
-                        <div class="rating-stars" id="ratingStars">
-                            <i class="fa-regular fa-star" data-rating="1"></i>
-                            <i class="fa-regular fa-star" data-rating="2"></i>
-                            <i class="fa-regular fa-star" data-rating="3"></i>
-                            <i class="fa-regular fa-star" data-rating="4"></i>
-                            <i class="fa-regular fa-star" data-rating="5"></i>
-                        </div>
-                        <input type="hidden" id="rating" name="rating" value="0">
+                    <div class="rating-stars" id="ratingStars">
+                        <i class="fa-regular fa-star" data-rating="1"></i>
+                        <i class="fa-regular fa-star" data-rating="2"></i>
+                        <i class="fa-regular fa-star" data-rating="3"></i>
+                        <i class="fa-regular fa-star" data-rating="4"></i>
+                        <i class="fa-regular fa-star" data-rating="5"></i>
                     </div>
+                    <input type="hidden" id="rating" name="rating" value="0">
                 </div>
                 
                 <div class="form-group">
@@ -742,8 +780,6 @@
                             <span>Ningún archivo seleccionado</span>
                         </div>
                     </div>
-                    
-                    <!-- Vista previa de la imagen -->
                     <div class="image-preview" id="imagePreview">
                         <img src="" alt="Vista previa">
                     </div>
@@ -757,12 +793,10 @@
             </form>
         </div>
         
-        <!-- LISTA DE OPINIONES -->
         <div class="lista-section" data-aos="fade-left">
             <h2>⭐ Lo que dicen nuestras clientas ⭐</h2>
             
             <div class="opiniones-grid" id="opinionesList">
-                <!-- Las opiniones se cargarán aquí dinámicamente -->
                 <div class="no-opiniones">
                     <i class="fa-regular fa-heart"></i>
                     <p>Cargando opiniones...</p>
@@ -771,50 +805,38 @@
         </div>
     </div>
     
-    <!-- BOTÓN FLOTANTE PARA SUBIR RÁPIDO -->
     <div class="floating-btn" onclick="scrollToForm()">
         <i class="fa-regular fa-pen-to-square"></i>
     </div>
     
-    <!-- MODAL PARA VER IMAGEN GRANDE - CORREGIDO -->
     <div class="modal" id="imageModal" onclick="closeModal()">
         <span class="modal-close" onclick="event.stopPropagation(); closeModal()">&times;</span>
         <div class="modal-content" onclick="event.stopPropagation()">
             <img src="" alt="Imagen grande" id="modalImage">
         </div>
     </div>
-            <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // INICIALIZAR SUPABASE
         const SUPABASE_URL = 'https://xhbwlgqlvqqxagpdnsqk.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhoYndsZ3FsdnFxeGFncGRuc3FrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5Nzg5NTEsImV4cCI6MjA4NzU1NDk1MX0.9K6JPZ205aM9u0zCDDriw1y6MQy2bhhOCdTECFNa1Ig';
         const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        // Variables globales
+        
         let currentRating = 0;
         let selectedFile = null;
         
-        // Inicializar AOS
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 50,
-            easing: 'ease-in-out'
-        });
+        AOS.init({ duration: 800, once: true, offset: 50, easing: 'ease-in-out' });
         
-        // SISTEMA DE ESTRELLAS
         const stars = document.querySelectorAll('.rating-stars i');
         const ratingInput = document.getElementById('rating');
         
         stars.forEach(star => {
             star.addEventListener('mouseenter', function() {
-                const rating = parseInt(this.getAttribute('data-rating'));
-                highlightStars(rating);
+                highlightStars(parseInt(this.getAttribute('data-rating')));
             });
-            
             star.addEventListener('mouseleave', function() {
                 highlightStars(currentRating);
             });
-            
             star.addEventListener('click', function() {
                 currentRating = parseInt(this.getAttribute('data-rating'));
                 ratingInput.value = currentRating;
@@ -835,7 +857,6 @@
             });
         }
         
-        // VISTA PREVIA DE IMAGEN
         const fileInput = document.getElementById('imagen');
         const fileName = document.getElementById('fileName').querySelector('span');
         const imagePreview = document.getElementById('imagePreview');
@@ -846,7 +867,6 @@
             if (file) {
                 selectedFile = file;
                 fileName.textContent = file.name;
-                
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     previewImg.src = e.target.result;
@@ -860,7 +880,6 @@
             }
         });
         
-        // ENVIAR FORMULARIO
         const form = document.getElementById('opinionForm');
         const submitBtn = document.getElementById('submitBtn');
         const messageDiv = document.getElementById('message');
@@ -889,13 +908,9 @@
                 
                 if (selectedFile) {
                     const fileName = `opiniones/${Date.now()}-${selectedFile.name}`;
-                    
                     const { error: uploadError } = await client.storage
                         .from('opiniones-imagenes')
-                        .upload(fileName, selectedFile, {
-                            cacheControl: '3600',
-                            upsert: false
-                        });
+                        .upload(fileName, selectedFile, { cacheControl: '3600', upsert: false });
                     
                     if (uploadError) throw uploadError;
                     
@@ -908,15 +923,13 @@
                 
                 const { error } = await client
                     .from('opiniones')
-                    .insert([
-                        {
-                            nombre: nombre,
-                            rating: currentRating,
-                            comentario: comentario,
-                            imagen_url: imagenUrl,
-                            fecha: new Date().toISOString()
-                        }
-                    ]);
+                    .insert([{
+                        nombre: nombre,
+                        rating: currentRating,
+                        comentario: comentario,
+                        imagen_url: imagenUrl,
+                        fecha: new Date().toISOString()
+                    }]);
                 
                 if (error) throw error;
                 
@@ -942,15 +955,11 @@
         function showMessage(text, type) {
             messageDiv.textContent = text;
             messageDiv.className = `message ${type} show`;
-            setTimeout(() => {
-                messageDiv.classList.remove('show');
-            }, 5000);
+            setTimeout(() => { messageDiv.classList.remove('show'); }, 5000);
         }
         
-        // CARGAR OPINIONES
         async function cargarOpiniones() {
             const opinionesList = document.getElementById('opinionesList');
-            
             try {
                 const { data: opiniones, error } = await client
                     .from('opiniones')
@@ -964,8 +973,7 @@
                         <div class="no-opiniones">
                             <i class="fa-regular fa-heart"></i>
                             <p>No hay opiniones todavía. ¡Sé la primera en compartir tu experiencia!</p>
-                        </div>
-                    `;
+                        </div>`;
                     return;
                 }
                 
@@ -983,63 +991,46 @@
                         ${op.imagen_url ? `
                             <div class="opinion-imagen" onclick="abrirModal('${op.imagen_url}')">
                                 <img src="${op.imagen_url}" alt="Foto de opinión">
-                            </div>
-                        ` : ''}
+                            </div>` : ''}
                     </div>
                 `).join('');
-                
             } catch (error) {
                 console.error('Error cargando opiniones:', error);
                 opinionesList.innerHTML = `
                     <div class="no-opiniones">
                         <i class="fa-regular fa-circle-exclamation"></i>
                         <p>Error al cargar las opiniones. Intenta de nuevo más tarde.</p>
-                    </div>
-                `;
+                    </div>`;
             }
         }
         
-        // MODAL PARA IMAGENES - CORREGIDO
         function abrirModal(imageUrl) {
             const modal = document.getElementById('imageModal');
             const modalImg = document.getElementById('modalImage');
             modalImg.src = imageUrl;
             modal.classList.add('show');
-            document.body.style.overflow = 'hidden'; // Evita scroll detrás del modal
+            document.body.style.overflow = 'hidden';
         }
         
         function closeModal() {
             const modal = document.getElementById('imageModal');
             modal.classList.remove('show');
-            document.body.style.overflow = ''; // Restaura scroll
+            document.body.style.overflow = '';
         }
         
-        // SCROLL AL FORMULARIO
         function scrollToForm() {
-            document.querySelector('.formulario-section').scrollIntoView({
-                behavior: 'smooth'
-            });
+            document.querySelector('.formulario-section').scrollIntoView({ behavior: 'smooth' });
         }
         
-        // Cargar opiniones al iniciar
         cargarOpiniones();
         
-        // Cerrar modal con ESC
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
+            if (e.key === 'Escape') closeModal();
         });
         
-        // Hacer funciones globales para que funcionen desde onclick
         window.abrirModal = abrirModal;
         window.closeModal = closeModal;
         window.scrollToForm = scrollToForm;
     </script>
 </body>
 </html>
-
-
-
-
-
