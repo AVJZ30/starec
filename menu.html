@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Star Ec ✨ Alfajores Artesanales</title>
+    <title>Menú Star · Alfajores Artesanales</title>
     
     <link rel="icon" type="image/x-icon" href="https://i.pinimg.com/736x/bc/14/5d/bc145d6d04b34c1d6e597726e444dd53.jpg">
     <link rel="apple-touch-icon" href="https://i.pinimg.com/736x/bc/14/5d/bc145d6d04b34c1d6e597726e444dd53.jpg">
@@ -54,7 +54,6 @@
             letter-spacing: -0.3px;
         }
 
-        /* Scrollbar minimalista */
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -66,7 +65,6 @@
             border-radius: 10px;
         }
         
-        /* HEADER */
         header {
             position: fixed;
             top: 0;
@@ -77,7 +75,7 @@
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
             box-shadow: 0 1px 20px rgba(74, 47, 29, 0.05);
@@ -143,136 +141,62 @@
             width: 100%;
         }
         
-        /* HERO DEL MENÚ */
         .menu-hero {
             margin-top: 80px;
             padding: 60px 10% 45px;
             text-align: center;
-            background: linear-gradient(180deg, var(--celeste-claro) 0%, var(--celeste-suave) 100%);
+            background-color: var(--blanco-roto);
+            background-image: radial-gradient(circle, #c4a882 1.5px, transparent 1.5px);
+            background-size: 28px 28px;
             position: relative;
             overflow: hidden;
-        }
-
-        .menu-hero::before {
-            content: '';
-            position: absolute;
-            top: -100px;
-            right: -80px;
-            width: 300px;
-            height: 300px;
-            background: var(--celeste);
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: floatSlow 8s ease-in-out infinite;
-        }
-
-        .menu-hero::after {
-            content: '';
-            position: absolute;
-            bottom: -60px;
-            left: -60px;
-            width: 220px;
-            height: 220px;
-            background: var(--celeste);
-            border-radius: 50%;
-            opacity: 0.25;
-            animation: floatSlow 6s ease-in-out infinite reverse;
-        }
-
-        @keyframes floatSlow {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(-20px, -15px) scale(1.06); }
         }
         
         .menu-hero h1 {
             font-size: 52px;
-            margin-bottom: 16px;
+            margin-bottom: 10px;
             color: var(--marron);
             position: relative;
             z-index: 2;
             letter-spacing: 1px;
         }
 
-        .menu-hero .subtitle {
-            font-size: 17px;
+        .menu-hero .hero-tagline {
+            font-size: 14px;
             color: var(--marron-claro);
             font-weight: 600;
-            max-width: 500px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .menu-hero .hero-message {
+            font-size: 16px;
+            color: var(--marron-claro);
+            font-weight: 500;
+            max-width: 650px;
             margin: 0 auto;
             position: relative;
             z-index: 2;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 18px 30px;
             border-radius: 50px;
             backdrop-filter: blur(8px);
             border: 1px solid var(--celeste);
-            letter-spacing: 0.8px;
+            letter-spacing: 0.3px;
+            line-height: 1.7;
             display: inline-block;
         }
         
-        /* CONTENEDOR */
         .menu-container {
             padding: 50px 6%;
             max-width: 1400px;
             margin: 0 auto;
+            background-color: var(--blanco-roto);
         }
         
-        /* TABS */
-        .menu-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 50px;
-            flex-wrap: wrap;
-        }
-        
-        .tab-btn {
-            padding: 12px 28px;
-            border: 1.5px solid #e0d6cc;
-            background: var(--blanco);
-            color: var(--marron);
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 600;
-            font-size: 14px;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: var(--transicion);
-            letter-spacing: 0.4px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tab-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--marron);
-            transition: left 0.4s ease;
-            z-index: -1;
-            border-radius: 50px;
-        }
-        
-        .tab-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--sombra-suave);
-            border-color: var(--marron);
-        }
-        
-        .tab-btn.active {
-            background: var(--marron);
-            color: white;
-            border-color: transparent;
-            box-shadow: 0 6px 20px rgba(74, 47, 29, 0.25);
-        }
-
-        .tab-btn.active::before {
-            left: 0;
-        }
-        
-        /* TÍTULO DE SECCIÓN */
         .menu-section-title {
             font-size: 36px;
             margin: 40px 0 28px;
@@ -298,7 +222,6 @@
             width: 70px;
         }
         
-        /* GRID */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -306,7 +229,6 @@
             margin-bottom: 30px;
         }
         
-        /* TARJETA */
         .menu-item {
             background: var(--blanco);
             border-radius: var(--borde-redondo);
@@ -323,24 +245,6 @@
             transform: translateY(-10px);
             box-shadow: var(--sombra-media);
             border-color: var(--celeste);
-        }
-
-        .menu-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, transparent 50%, rgba(168, 223, 241, 0.05) 100%);
-            z-index: 1;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .menu-item:hover::before {
-            opacity: 1;
         }
         
         .menu-item-image {
@@ -367,7 +271,7 @@
             position: absolute;
             top: 14px;
             right: 14px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(6px);
             padding: 6px 14px;
             border-radius: 20px;
@@ -399,7 +303,7 @@
         
         .menu-item-content h3 {
             font-size: 22px;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             color: var(--marron);
             letter-spacing: 0.3px;
         }
@@ -410,6 +314,7 @@
             margin-bottom: 12px;
             font-style: italic;
             opacity: 0.85;
+            line-height: 1.6;
         }
         
         .menu-item-price {
@@ -419,6 +324,36 @@
             margin-bottom: 16px;
             font-family: 'Cormorant Garamond', serif;
             letter-spacing: 0.5px;
+        }
+
+        .btn-agregar {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px 18px;
+            background: var(--marron);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transicion);
+            font-family: 'Quicksand', sans-serif;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 12px rgba(74, 47, 29, 0.2);
+        }
+
+        .btn-agregar:hover {
+            background: var(--marron-oscuro);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(74, 47, 29, 0.35);
+        }
+
+        .btn-agregar.agregado {
+            background: #25D366;
         }
         
         .whatsapp-btn {
@@ -448,15 +383,237 @@
             box-shadow: 0 8px 22px rgba(37, 211, 102, 0.35);
         }
 
-        .whatsapp-btn i {
-            transition: transform 0.3s ease;
+        /* CARRITO FLOTANTE */
+        .carrito-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            width: 60px;
+            height: 60px;
+            background: var(--marron);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 6px 22px rgba(74, 47, 29, 0.3);
+            cursor: pointer;
+            transition: var(--transicion);
+            z-index: 999;
+            border: 2px solid white;
+            animation: floatBounce 3s ease-in-out infinite;
         }
 
-        .whatsapp-btn:hover i {
-            transform: scale(1.2);
+        .carrito-float:hover {
+            background: var(--marron-oscuro);
+            transform: scale(1.12);
+            box-shadow: 0 12px 30px rgba(74, 47, 29, 0.5);
+            animation: none;
         }
-        
-        /* CAJAS SECTION */
+
+        .carrito-contador {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #e74c3c;
+            color: white;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            display: none;
+        }
+
+        @keyframes floatBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        /* PANEL DEL CARRITO */
+        .carrito-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 2000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .carrito-overlay.abierto {
+            display: block;
+            opacity: 1;
+        }
+
+        .carrito-panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            max-width: 90vw;
+            height: 100vh;
+            background: white;
+            z-index: 2001;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.15);
+            transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+        }
+
+        .carrito-panel.abierto {
+            right: 0;
+        }
+
+        .carrito-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            border-bottom: 1px solid #f0e8dc;
+        }
+
+        .carrito-header h3 {
+            font-size: 24px;
+            color: var(--marron);
+        }
+
+        .carrito-cerrar {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--marron);
+            cursor: pointer;
+            transition: var(--transicion);
+        }
+
+        .carrito-cerrar:hover {
+            color: var(--marron-oscuro);
+        }
+
+        .carrito-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 24px;
+        }
+
+        .carrito-vacio-panel {
+            text-align: center;
+            color: var(--texto-medio);
+            font-style: italic;
+            padding: 60px 20px;
+            font-size: 15px;
+        }
+
+        .carrito-item-panel {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--marron-suave);
+            padding: 12px 16px;
+            border-radius: 16px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .carrito-item-panel .item-nombre {
+            font-weight: 600;
+            color: var(--marron);
+            font-size: 14px;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .carrito-item-panel .qty-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .carrito-item-panel .qty-btn {
+            background: white;
+            border: 1px solid var(--celeste);
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--marron);
+            cursor: pointer;
+            transition: var(--transicion);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carrito-item-panel .qty-num {
+            font-size: 15px;
+            font-weight: 700;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .carrito-item-panel .item-subtotal {
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--marron-claro);
+        }
+
+        .carrito-footer {
+            padding: 20px 24px;
+            border-top: 1px solid #f0e8dc;
+        }
+
+        .carrito-total-panel {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--marron);
+            margin-bottom: 16px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .btn-pedir-panel {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 14px;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: var(--transicion);
+            font-family: 'Quicksand', sans-serif;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+        }
+
+        .btn-pedir-panel:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        .btn-pedir-panel:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* CAJAS Y MIX */
         .cajas-section {
             margin: 55px 0;
             padding: 50px 40px;
@@ -464,35 +621,18 @@
             border-radius: 32px;
             position: relative;
             border: 1px solid #e8ddd0;
-            overflow: hidden;
-        }
-
-        .cajas-section::before {
-            content: '';
-            position: absolute;
-            top: -40px;
-            right: -40px;
-            width: 180px;
-            height: 180px;
-            background: var(--celeste);
-            border-radius: 50%;
-            opacity: 0.2;
         }
         
         .cajas-section h2 {
             color: var(--marron);
             font-size: 36px;
             margin-bottom: 32px;
-            position: relative;
-            z-index: 2;
         }
         
         .cajas-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 24px;
-            position: relative;
-            z-index: 2;
         }
         
         .caja-card {
@@ -503,21 +643,6 @@
             border: 1px solid #e8ddd0;
             transition: var(--transicion);
             box-shadow: var(--sombra-suave);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .caja-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--marron);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-            border-radius: 0 0 24px 24px;
         }
         
         .caja-card:hover {
@@ -525,19 +650,10 @@
             border-color: var(--marron);
             box-shadow: var(--sombra-media);
         }
-
-        .caja-card:hover::after {
-            transform: scaleX(1);
-        }
         
         .caja-icon {
             font-size: 38px;
             margin-bottom: 14px;
-            transition: transform 0.4s ease;
-        }
-
-        .caja-card:hover .caja-icon {
-            transform: scale(1.15);
         }
         
         .caja-card h3 {
@@ -553,7 +669,6 @@
             margin-bottom: 20px;
         }
         
-        /* MIX SECTION */
         .mix-section {
             margin: 55px 0;
             padding: 50px 40px;
@@ -562,28 +677,12 @@
             box-shadow: var(--sombra-suave);
             text-align: center;
             border: 1px solid var(--celeste);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .mix-section::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            left: -50px;
-            width: 160px;
-            height: 160px;
-            background: var(--celeste-suave);
-            border-radius: 50%;
-            opacity: 0.4;
         }
         
         .mix-section h2 {
             font-size: 36px;
             margin-bottom: 32px;
             color: var(--marron);
-            position: relative;
-            z-index: 2;
         }
         
         .mix-options {
@@ -592,8 +691,6 @@
             gap: 24px;
             flex-wrap: wrap;
             margin-bottom: 28px;
-            position: relative;
-            z-index: 2;
         }
         
         .mix-option {
@@ -606,7 +703,6 @@
             border: 1px solid var(--celeste);
             transition: var(--transicion);
             font-family: 'Quicksand', sans-serif;
-            cursor: default;
         }
         
         .mix-option:hover {
@@ -623,52 +719,15 @@
             font-weight: 700;
         }
         
-        /* WHATSAPP FLOTANTE */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 28px;
-            right: 28px;
-            width: 60px;
-            height: 60px;
-            background: #25D366;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 28px;
-            box-shadow: 0 6px 22px rgba(37, 211, 102, 0.3);
-            cursor: pointer;
-            transition: var(--transicion);
-            z-index: 999;
-            text-decoration: none;
-            border: 2px solid white;
-            animation: floatBounce 3s ease-in-out infinite;
-        }
-
-        @keyframes floatBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-        }
-        
-        .whatsapp-float:hover {
-            background: #128C7E;
-            transform: scale(1.12);
-            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.5);
-            animation: none;
-        }
-        
-        .hidden {
-            display: none !important;
-        }
-        
         @media (max-width: 768px) {
             .nav-menu { display: none; }
             .menu-hero h1 { font-size: 34px; }
             .menu-section-title { font-size: 28px; }
+            .menu-item-badge { font-size: 10px; padding: 4px 10px; }
+            .menu-hero .hero-message { font-size: 14px; padding: 14px 20px; }
             .cajas-section { padding: 30px 20px; }
             .mix-option { width: 100%; padding: 18px; }
-            .menu-item-badge { font-size: 10px; padding: 4px 10px; }
+            .carrito-panel { width: 100%; max-width: 100vw; right: -100vw; }
         }
     </style>
 </head>
@@ -688,272 +747,291 @@
     </header>
     
     <section class="menu-hero" data-aos="fade-down">
-        <h1>✨ MENÚ STAR ✨</h1>
-        <span class="subtitle">ARMA TU CAJA CON TUS FAVORITOS</span>
+        <h1>SOMOS TU ANTOJITO</h1>
+        <p class="hero-tagline">LOS DULCES QUE ENAMORAN AL PRIMER BOCADO</p>
+        <p class="hero-message">
+            Si tuviste un mal día, un buen día, si aprobaste ese examen, si todo salió perfecto o si nada salió como esperabas… igual estamos para ti.<br>
+            Haz tu pedido, nosotros nos encargamos de endulzarte el momento.
+        </p>
     </section>
     
     <div class="menu-container">
-        <div class="menu-tabs" data-aos="fade-up">
-            <button class="tab-btn active" data-filter="todos">Todos</button>
-            <button class="tab-btn" data-filter="clasicos">Clásicos</button>
-            <button class="tab-btn" data-filter="evermore">Evermore</button>
-            <button class="tab-btn" data-filter="red">Red Velvet</button>
-            <button class="tab-btn" data-filter="reputation">Reputation</button>
-            <button class="tab-btn" data-filter="cajas">Cajas</button>
-        </div>
-        
         <!-- CLÁSICOS -->
-        <div class="productos-section" data-categoria="clasicos">
-            <h2 class="menu-section-title" data-aos="fade-up">✨ CLÁSICOS</h2>
+        <div class="productos-section">
+            <h2 class="menu-section-title" data-aos="fade-up">CLÁSICOS</h2>
             <div class="menu-grid">
-                <div class="menu-item" data-aos="zoom-in" data-categoria="clasicos">
+                <div class="menu-item" data-aos="zoom-in">
                     <div class="menu-item-image">
                         <img src="https://i.pinimg.com/736x/e1/af/cc/e1afccf1247b3d266038e13b34f7e6c3.jpg" alt="CLASIC">
-                        <span class="menu-item-badge">⭐ FAV</span>
+                        <span class="menu-item-badge">FAV</span>
                     </div>
                     <div class="menu-item-content">
                         <h3>CLASIC</h3>
                         <p class="menu-item-desc">El tradicional de siempre</p>
                         <div class="menu-item-price">$0,75</div>
-                        <a href="https://wa.me/5930990548575?text=¡Hola! Quiero pedir:%0A🍪 CLASIC - $0,75" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Pedir por WhatsApp</a>
+                        <button class="btn-agregar" onclick="agregarAlCarrito('CLASIC', 0.75, this)"><i class="fas fa-plus"></i> Agregar al carrito</button>
                     </div>
                 </div>
             </div>
         </div>
         
         <!-- EVERMORE (PISTACHO) -->
-        <div class="productos-section" data-categoria="evermore">
-            <h2 class="menu-section-title" data-aos="fade-up">🌰 EVERMORE · PISTACHO</h2>
+        <div class="productos-section">
+            <h2 class="menu-section-title" data-aos="fade-up">EVERMORE · PISTACHO</h2>
             <div class="menu-grid">
-                <div class="menu-item" data-aos="zoom-in" data-categoria="evermore">
+                <div class="menu-item" data-aos="zoom-in">
                     <div class="menu-item-image">
                         <img src="https://i.pinimg.com/736x/13/d1/9f/13d19fb5980f858cc17ad49b09789a06.jpg" alt="EVERMORE PISTACHO">
-                        <span class="menu-item-badge">🌰 TOP</span>
+                        <span class="menu-item-badge">TOP</span>
                     </div>
                     <div class="menu-item-content">
                         <h3>ALFAJOR EVERMORE</h3>
                         <p class="menu-item-desc">Pistacho · Unidad</p>
                         <div class="menu-item-price">$2,00</div>
-                        <a href="https://wa.me/5930990548575?text=¡Hola! Quiero pedir:%0A🌰 ALFAJOR EVERMORE PISTACHO - $2,00" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Pedir por WhatsApp</a>
+                        <button class="btn-agregar" onclick="agregarAlCarrito('Alfajor Evermore Pistacho', 2.00, this)"><i class="fas fa-plus"></i> Agregar al carrito</button>
                     </div>
                 </div>
-                <div class="menu-item" data-aos="zoom-in" data-aos-delay="100" data-categoria="evermore">
+                <div class="menu-item" data-aos="zoom-in" data-aos-delay="100">
                     <div class="menu-item-image">
                         <img src="https://i.pinimg.com/736x/04/4d/2a/044d2adbf8b2dec3934968a1e7a6e8a1.jpg" alt="PISTACHO X3">
-                        <span class="menu-item-badge">📦 X3</span>
+                        <span class="menu-item-badge">X3</span>
                     </div>
                     <div class="menu-item-content">
                         <h3>PISTACHO X3</h3>
                         <p class="menu-item-desc">Trío intenso</p>
                         <div class="menu-item-price">$5,00</div>
-                        <a href="https://wa.me/5930990548575?text=¡Hola! Quiero pedir:%0A🌰 PISTACHO X3 - $5,00" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Pedir por WhatsApp</a>
+                        <button class="btn-agregar" onclick="agregarAlCarrito('Pistacho X3', 5.00, this)"><i class="fas fa-plus"></i> Agregar al carrito</button>
                     </div>
                 </div>
-                <div class="menu-item" data-aos="zoom-in" data-aos-delay="200" data-categoria="evermore">
+                <div class="menu-item" data-aos="zoom-in" data-aos-delay="200">
                     <div class="menu-item-image">
                         <img src="https://i.pinimg.com/736x/6a/f1/c7/6af1c7714496543cc90a1a7e97dd6a4d.jpg" alt="PISTACHO X6">
-                        <span class="menu-item-badge">📦 X6</span>
+                        <span class="menu-item-badge">X6</span>
                     </div>
                     <div class="menu-item-content">
                         <h3>PISTACHO X6</h3>
                         <p class="menu-item-desc">Media docena</p>
                         <div class="menu-item-price">$8,00</div>
-                        <a href="https://wa.me/5930990548575?text=¡Hola! Quiero pedir:%0A🌰 PISTACHO X6 - $8,00" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Pedir por WhatsApp</a>
+                        <button class="btn-agregar" onclick="agregarAlCarrito('Pistacho X6', 8.00, this)"><i class="fas fa-plus"></i> Agregar al carrito</button>
                     </div>
                 </div>
             </div>
         </div>
         
         <!-- RED VELVET -->
-        <div class="productos-section" data-categoria="red">
-            <h2 class="menu-section-title" data-aos="fade-up">❤️ RED VELVET</h2>
+        <div class="productos-section">
+            <h2 class="menu-section-title" data-aos="fade-up">RED VELVET</h2>
             <div class="menu-grid">
-                <div class="menu-item" data-aos="zoom-in" data-categoria="red">
+                <div class="menu-item" data-aos="zoom-in">
                     <div class="menu-item-image">
                         <img src="https://i.pinimg.com/736x/c4/cc/ad/c4ccadf728bf897e7d96e2ddfc955983.jpg" alt="RED VELVET">
-                        <span class="menu-item-badge">❤️ NEW</span>
+                        <span class="menu-item-badge">NEW</span>
                     </div>
                     <div class="menu-item-content">
                         <h3>RED VELVET</h3>
                         <p class="menu-item-desc">Unidad</p>
                         <div class="menu-item-price">$1,50</div>
-                        <a href="https://wa.me/5930990548575?text=¡Hola! Quiero pedir:%0A🍰 RED VELVET - $1,50" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Pedir por WhatsApp</a>
+                        <button class="btn-agregar" onclick="agregarAlCarrito('Red Velvet', 1.50, this)"><i class="fas fa-plus"></i> Agregar al carrito</button>
                     </div>
                 </div>
-                <div class="menu-item" data-aos="zoom-in" data-aos-delay="100" data-categoria="red">
+                <div class="menu-item" data-aos="zoom-in" data-aos-delay="100">
                     <div class="menu-item-image">
                         <img src="https://i.pinimg.com/736x/d1/c4/78/d1c478e5b6d5db8d46baa6c71bed9722.jpg" alt="RED VELVET X3">
-                        <span class="menu-item-badge">📦 X3</span>
+                        <span class="menu-item-badge">X3</span>
                     </div>
                     <div class="menu-item-content">
                         <h3>RED VELVET X3</h3>
                         <p class="menu-item-desc">Trío aterciopelado</p>
                         <div class="menu-item-price">$4,00</div>
-                        <a href="https://wa.me/5930990548575?text=¡Hola! Quiero pedir:%0A🍰 RED VELVET X3 - $4,00" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Pedir por WhatsApp</a>
+                        <button class="btn-agregar" onclick="agregarAlCarrito('Red Velvet X3', 4.00, this)"><i class="fas fa-plus"></i> Agregar al carrito</button>
                     </div>
                 </div>
-                <div class="menu-item" data-aos="zoom-in" data-aos-delay="200" data-categoria="red">
+                <div class="menu-item" data-aos="zoom-in" data-aos-delay="200">
                     <div class="menu-item-image">
                         <img src="https://i.pinimg.com/736x/6a/fe/0e/6afe0e1f6fa3e80d4921925c97ae93ad.jpg" alt="RED VELVET X6">
-                        <span class="menu-item-badge">📦 X6</span>
+                        <span class="menu-item-badge">X6</span>
                     </div>
                     <div class="menu-item-content">
                         <h3>RED VELVET X6</h3>
                         <p class="menu-item-desc">Media docena</p>
                         <div class="menu-item-price">$6,00</div>
-                        <a href="https://wa.me/5930990548575?text=¡Hola! Quiero pedir:%0A🍰 RED VELVET X6 - $6,00" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Pedir por WhatsApp</a>
+                        <button class="btn-agregar" onclick="agregarAlCarrito('Red Velvet X6', 6.00, this)"><i class="fas fa-plus"></i> Agregar al carrito</button>
                     </div>
                 </div>
             </div>
         </div>
         
         <!-- REPUTATION (NUTELLA) -->
-        <div class="productos-section" data-categoria="reputation">
-            <h2 class="menu-section-title" data-aos="fade-up">🍫 REPUTATION · NUTELLA</h2>
+        <div class="productos-section">
+            <h2 class="menu-section-title" data-aos="fade-up">REPUTATION · NUTELLA</h2>
             <div class="menu-grid">
-                <div class="menu-item" data-aos="zoom-in" data-categoria="reputation">
+                <div class="menu-item" data-aos="zoom-in">
                     <div class="menu-item-image">
                         <img src="https://i.pinimg.com/736x/84/30/b4/8430b437cce7653125217de33001cff9.jpg" alt="REPUTATION NUTELLA">
-                        <span class="menu-item-badge">🍫 BEST</span>
+                        <span class="menu-item-badge">BEST</span>
                     </div>
                     <div class="menu-item-content">
                         <h3>ALFAJOR REPUTATION</h3>
                         <p class="menu-item-desc">Nutella · Unidad</p>
                         <div class="menu-item-price">$1,75</div>
-                        <a href="https://wa.me/5930990548575?text=¡Hola! Quiero pedir:%0A🍫 ALFAJOR REPUTATION NUTELLA - $1,75" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Pedir por WhatsApp</a>
+                        <button class="btn-agregar" onclick="agregarAlCarrito('Alfajor Reputation Nutella', 1.75, this)"><i class="fas fa-plus"></i> Agregar al carrito</button>
                     </div>
                 </div>
-                <div class="menu-item" data-aos="zoom-in" data-aos-delay="100" data-categoria="reputation">
+                <div class="menu-item" data-aos="zoom-in" data-aos-delay="100">
                     <div class="menu-item-image">
                         <img src="https://i.pinimg.com/736x/8f/d3/63/8fd3635747198c487432d6e4b36acdde.jpg" alt="NUTELLA X3">
-                        <span class="menu-item-badge">📦 X3</span>
+                        <span class="menu-item-badge">X3</span>
                     </div>
                     <div class="menu-item-content">
                         <h3>NUTELLA X3</h3>
                         <p class="menu-item-desc">Trío cremoso</p>
                         <div class="menu-item-price">$4,50</div>
-                        <a href="https://wa.me/5930990548575?text=¡Hola! Quiero pedir:%0A🍫 NUTELLA X3 - $4,50" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Pedir por WhatsApp</a>
+                        <button class="btn-agregar" onclick="agregarAlCarrito('Nutella X3', 4.50, this)"><i class="fas fa-plus"></i> Agregar al carrito</button>
                     </div>
                 </div>
-                <div class="menu-item" data-aos="zoom-in" data-aos-delay="200" data-categoria="reputation">
+                <div class="menu-item" data-aos="zoom-in" data-aos-delay="200">
                     <div class="menu-item-image">
                         <img src="https://i.pinimg.com/736x/b9/be/6f/b9be6f3039b6773b8a67f716a412fd29.jpg" alt="NUTELLA X6">
-                        <span class="menu-item-badge">📦 X6</span>
+                        <span class="menu-item-badge">X6</span>
                     </div>
                     <div class="menu-item-content">
                         <h3>NUTELLA X6</h3>
                         <p class="menu-item-desc">Media docena</p>
                         <div class="menu-item-price">$7,00</div>
-                        <a href="https://wa.me/5930990548575?text=¡Hola! Quiero pedir:%0A🍫 NUTELLA X6 - $7,00" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Pedir por WhatsApp</a>
+                        <button class="btn-agregar" onclick="agregarAlCarrito('Nutella X6', 7.00, this)"><i class="fas fa-plus"></i> Agregar al carrito</button>
                     </div>
                 </div>
             </div>
         </div>
         
         <!-- MANJAR -->
-        <div class="productos-section" data-categoria="clasicos">
-            <h2 class="menu-section-title" data-aos="fade-up">🥛 MANJAR</h2>
+        <div class="productos-section">
+            <h2 class="menu-section-title" data-aos="fade-up">MANJAR</h2>
             <div class="menu-grid">
-                <div class="menu-item" data-aos="zoom-in" data-categoria="clasicos">
+                <div class="menu-item" data-aos="zoom-in">
                     <div class="menu-item-image">
                         <img src="https://i.pinimg.com/736x/8a/8b/e3/8a8be3a4619e258cd164d3549931d521.jpg" alt="MANJAR X3">
-                        <span class="menu-item-badge">📦 X3</span>
+                        <span class="menu-item-badge">X3</span>
                     </div>
                     <div class="menu-item-content">
                         <h3>MANJAR X3</h3>
                         <p class="menu-item-desc">Dulce de leche</p>
                         <div class="menu-item-price">$2,00</div>
-                        <a href="https://wa.me/5930990548575?text=¡Hola! Quiero pedir:%0A🥛 MANJAR X3 - $2,00" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Pedir por WhatsApp</a>
+                        <button class="btn-agregar" onclick="agregarAlCarrito('Manjar X3', 2.00, this)"><i class="fas fa-plus"></i> Agregar al carrito</button>
                     </div>
                 </div>
-                <div class="menu-item" data-aos="zoom-in" data-aos-delay="100" data-categoria="clasicos">
+                <div class="menu-item" data-aos="zoom-in" data-aos-delay="100">
                     <div class="menu-item-image">
                         <img src="https://i.pinimg.com/736x/c0/ca/46/c0ca462ef2406a85fc428ba615a236f3.jpg" alt="MANJAR X6">
-                        <span class="menu-item-badge">📦 X6</span>
+                        <span class="menu-item-badge">X6</span>
                     </div>
                     <div class="menu-item-content">
                         <h3>MANJAR X6</h3>
                         <p class="menu-item-desc">Media docena</p>
                         <div class="menu-item-price">$3,00</div>
-                        <a href="https://wa.me/5930990548575?text=¡Hola! Quiero pedir:%0A🥛 MANJAR X6 - $3,00" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Pedir por WhatsApp</a>
+                        <button class="btn-agregar" onclick="agregarAlCarrito('Manjar X6', 3.00, this)"><i class="fas fa-plus"></i> Agregar al carrito</button>
                     </div>
                 </div>
             </div>
         </div>
         
         <!-- GALLETAS -->
-        <div class="productos-section" data-categoria="clasicos">
-            <h2 class="menu-section-title" data-aos="fade-up">🍪 GALLETAS</h2>
+        <div class="productos-section">
+            <h2 class="menu-section-title" data-aos="fade-up">GALLETAS</h2>
             <div class="menu-grid">
-                <div class="menu-item" data-aos="zoom-in" data-categoria="clasicos">
+                <div class="menu-item" data-aos="zoom-in">
                     <div class="menu-item-image">
                         <img src="https://i.pinimg.com/736x/e1/af/cc/e1afccf1247b3d266038e13b34f7e6c3.jpg" alt="GALLETAS X3">
-                        <span class="menu-item-badge">📦 X3</span>
+                        <span class="menu-item-badge">X3</span>
                     </div>
                     <div class="menu-item-content">
                         <h3>GALLETAS X3</h3>
                         <p class="menu-item-desc">Las de toda la vida</p>
                         <div class="menu-item-price">$5,00</div>
-                        <a href="https://wa.me/5930990548575?text=¡Hola! Quiero pedir:%0A🍪 GALLETAS X3 - $5,00" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Pedir por WhatsApp</a>
+                        <button class="btn-agregar" onclick="agregarAlCarrito('Galletas X3', 5.00, this)"><i class="fas fa-plus"></i> Agregar al carrito</button>
                     </div>
                 </div>
-                <div class="menu-item" data-aos="zoom-in" data-aos-delay="100" data-categoria="clasicos">
+                <div class="menu-item" data-aos="zoom-in" data-aos-delay="100">
                     <div class="menu-item-image">
                         <img src="https://i.pinimg.com/736x/d1/20/e2/d120e2392b5ede5817f4bba8ec6f7d73.jpg" alt="GALLETA UNIDAD">
-                        <span class="menu-item-badge">⭐ UNIDAD</span>
+                        <span class="menu-item-badge">UNIDAD</span>
                     </div>
                     <div class="menu-item-content">
                         <h3>GALLETA</h3>
                         <p class="menu-item-desc">Unidad</p>
                         <div class="menu-item-price">$2,00</div>
-                        <a href="https://wa.me/5930990548575?text=¡Hola! Quiero pedir:%0A🍪 GALLETA - $2,00" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Pedir por WhatsApp</a>
+                        <button class="btn-agregar" onclick="agregarAlCarrito('Galleta Unidad', 2.00, this)"><i class="fas fa-plus"></i> Agregar al carrito</button>
                     </div>
                 </div>
             </div>
         </div>
         
         <!-- MIX -->
-        <div class="mix-section" data-aos="fade-up" data-categoria="cajas">
-            <h2>🎁 MIX · CAJAS ESPECIALES</h2>
+        <div class="mix-section" data-aos="fade-up">
+            <h2>MIX · CAJAS ESPECIALES</h2>
             <div class="mix-options">
                 <div class="mix-option" data-aos="zoom-in">MIX · 3 SABORES <span class="price">$3,50</span></div>
                 <div class="mix-option" data-aos="zoom-in" data-aos-delay="100">MIX · 4 SABORES <span class="price">$4,50</span></div>
             </div>
-            <a href="https://wa.me/5930990548575?text=¡Hola! Quiero pedir un MIX especial:%0A🎁 ¿Qué sabores tienen disponibles?" target="_blank" class="whatsapp-btn" style="width: auto; padding: 15px 45px; margin-top: 20px; display: inline-flex;">
-                <i class="fab fa-whatsapp"></i> Consultar Mix por WhatsApp
-            </a>
+            <button class="btn-agregar" onclick="agregarAlCarrito('MIX 3 Sabores', 3.50, this)" style="width: auto; padding: 15px 45px; display: inline-flex; margin: 5px;"><i class="fas fa-plus"></i> Agregar Mix 3</button>
+            <button class="btn-agregar" onclick="agregarAlCarrito('MIX 4 Sabores', 4.50, this)" style="width: auto; padding: 15px 45px; display: inline-flex; margin: 5px;"><i class="fas fa-plus"></i> Agregar Mix 4</button>
         </div>
         
         <!-- CAJAS -->
-        <div class="cajas-section" data-aos="fade-up" data-categoria="cajas">
-            <h2>📦 CAJAS</h2>
+        <div class="cajas-section" data-aos="fade-up">
+            <h2>CAJAS</h2>
             <div class="cajas-grid">
                 <div class="caja-card" data-aos="flip-left">
-                    <div class="caja-icon">📦</div>
+                    <div class="caja-icon"><i class="fas fa-box"></i></div>
                     <h3>CAJA X3</h3>
                     <p>Clásicos</p>
-                    <a href="https://wa.me/5930990548575?text=¡Hola! Quiero pedir:%0A📦 CAJA X3 Clásicos" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Pedir</a>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('CAJA X3 Clásicos', 0, this)" style="width:100%"><i class="fas fa-plus"></i> Agregar al carrito</button>
                 </div>
                 <div class="caja-card" data-aos="flip-left" data-aos-delay="100">
-                    <div class="caja-icon">📦</div>
+                    <div class="caja-icon"><i class="fas fa-box"></i></div>
                     <h3>CAJA X4</h3>
                     <p>Selección especial</p>
-                    <a href="https://wa.me/5930990548575?text=¡Hola! Quiero pedir:%0A📦 CAJA X4 Selección especial" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Pedir</a>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('CAJA X4 Selección especial', 0, this)" style="width:100%"><i class="fas fa-plus"></i> Agregar al carrito</button>
                 </div>
                 <div class="caja-card" data-aos="flip-left" data-aos-delay="200">
-                    <div class="caja-icon">📦</div>
+                    <div class="caja-icon"><i class="fas fa-box"></i></div>
                     <h3>CAJA X6</h3>
                     <p>Para compartir</p>
-                    <a href="https://wa.me/5930990548575?text=¡Hola! Quiero pedir:%0A📦 CAJA X6 Para compartir" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Pedir</a>
+                    <button class="btn-agregar" onclick="agregarAlCarrito('CAJA X6 Para compartir', 0, this)" style="width:100%"><i class="fas fa-plus"></i> Agregar al carrito</button>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- WHATSAPP FLOTANTE -->
-    <a href="https://wa.me/5930990548575?text=¡Hola! Quiero hacer un pedido a Star Ec ✨" target="_blank" class="whatsapp-float">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <!-- CARRITO FLOTANTE -->
+    <div class="carrito-float" onclick="abrirCarrito()">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="carrito-contador" id="carritoContador">0</span>
+    </div>
+
+    <!-- OVERLAY -->
+    <div class="carrito-overlay" id="carritoOverlay" onclick="cerrarCarrito()"></div>
+
+    <!-- PANEL DEL CARRITO -->
+    <div class="carrito-panel" id="carritoPanel">
+        <div class="carrito-header">
+            <h3>Tu Caja</h3>
+            <button class="carrito-cerrar" onclick="cerrarCarrito()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="carrito-body" id="carritoBody">
+            <div class="carrito-vacio-panel" id="carritoVacioPanel">
+                ★★★<br>
+                Agrega productos para armar tu caja
+            </div>
+            <div id="carritoListaPanel"></div>
+        </div>
+        <div class="carrito-footer">
+            <div class="carrito-total-panel" id="carritoTotalPanel" style="display: none;"></div>
+            <button class="btn-pedir-panel" id="btnPedirPanel" onclick="pedirPorWhatsApp()" disabled>
+                <i class="fab fa-whatsapp"></i> Pedir por WhatsApp
+            </button>
+        </div>
+    </div>
     
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
@@ -962,42 +1040,112 @@
         window.addEventListener('scroll', () => {
             document.getElementById('header').classList.toggle('scrolled', window.scrollY > 30);
         });
-        
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const productos = document.querySelectorAll('.menu-item');
-        const secciones = document.querySelectorAll('.productos-section');
-        const mixSection = document.querySelector('.mix-section');
-        const cajasSection = document.querySelector('.cajas-section');
-        
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                tabBtns.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                const filter = this.getAttribute('data-filter');
+
+        const carrito = {};
+
+        function agregarAlCarrito(nombre, precio, btn) {
+            if (carrito[nombre]) {
+                carrito[nombre].cantidad++;
+            } else {
+                carrito[nombre] = { precio: precio, cantidad: 1 };
+            }
+            
+            if (btn) {
+                btn.textContent = 'Agregado';
+                btn.classList.add('agregado');
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-plus"></i> Agregar al carrito';
+                    btn.classList.remove('agregado');
+                }, 600);
+            }
+            
+            actualizarCarrito();
+        }
+
+        function actualizarCarrito() {
+            const listaPanel = document.getElementById('carritoListaPanel');
+            const vacioPanel = document.getElementById('carritoVacioPanel');
+            const totalPanel = document.getElementById('carritoTotalPanel');
+            const btnPedirPanel = document.getElementById('btnPedirPanel');
+            const contador = document.getElementById('carritoContador');
+            
+            listaPanel.innerHTML = '';
+            
+            const productos = Object.keys(carrito);
+            let totalItems = 0;
+            
+            if (productos.length === 0) {
+                vacioPanel.style.display = 'block';
+                totalPanel.style.display = 'none';
+                btnPedirPanel.disabled = true;
+                contador.style.display = 'none';
+                return;
+            }
+            
+            vacioPanel.style.display = 'none';
+            totalPanel.style.display = 'block';
+            btnPedirPanel.disabled = false;
+            
+            let total = 0;
+            
+            productos.forEach(nombre => {
+                const item = carrito[nombre];
+                total += item.precio * item.cantidad;
+                totalItems += item.cantidad;
                 
-                if (filter === 'todos') {
-                    secciones.forEach(section => section.style.display = 'block');
-                    productos.forEach(item => item.classList.remove('hidden'));
-                    mixSection.style.display = 'block';
-                    cajasSection.style.display = 'block';
-                } else {
-                    productos.forEach(item => item.classList.add('hidden'));
-                    document.querySelectorAll(`.menu-item[data-categoria="${filter}"]`).forEach(item => item.classList.remove('hidden'));
-                    
-                    secciones.forEach(section => {
-                        section.style.display = section.getAttribute('data-categoria') === filter ? 'block' : 'none';
-                    });
-                    
-                    if (filter === 'cajas') {
-                        mixSection.style.display = 'block';
-                        cajasSection.style.display = 'block';
-                    } else {
-                        mixSection.style.display = 'none';
-                        cajasSection.style.display = 'none';
-                    }
-                }
+                const div = document.createElement('div');
+                div.className = 'carrito-item-panel';
+                div.innerHTML = `
+                    <span class="item-nombre">${nombre}</span>
+                    <div class="qty-control">
+                        <button class="qty-btn" onclick="cambiarCantidad('${nombre}', -1)">-</button>
+                        <span class="qty-num">${item.cantidad}</span>
+                        <button class="qty-btn" onclick="cambiarCantidad('${nombre}', 1)">+</button>
+                    </div>
+                    <span class="item-subtotal">$${(item.precio * item.cantidad).toFixed(2)}</span>
+                `;
+                listaPanel.appendChild(div);
             });
-        });
+            
+            totalPanel.textContent = `Total: $${total.toFixed(2)}`;
+            contador.textContent = totalItems;
+            contador.style.display = 'flex';
+        }
+
+        function cambiarCantidad(nombre, delta) {
+            carrito[nombre].cantidad += delta;
+            if (carrito[nombre].cantidad <= 0) {
+                delete carrito[nombre];
+            }
+            actualizarCarrito();
+        }
+
+        function abrirCarrito() {
+            document.getElementById('carritoOverlay').classList.add('abierto');
+            document.getElementById('carritoPanel').classList.add('abierto');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function cerrarCarrito() {
+            document.getElementById('carritoOverlay').classList.remove('abierto');
+            document.getElementById('carritoPanel').classList.remove('abierto');
+            document.body.style.overflow = '';
+        }
+
+        function pedirPorWhatsApp() {
+            const lineas = [];
+            let total = 0;
+            
+            for (let [nombre, datos] of Object.entries(carrito)) {
+                lineas.push(`${datos.cantidad} ${nombre} - $${(datos.precio * datos.cantidad).toFixed(2)}`);
+                total += datos.precio * datos.cantidad;
+            }
+            
+            if (lineas.length === 0) return;
+            
+            const mensaje = `Hola.%0AQuiero armar una caja con:%0A${lineas.join('%0A')}%0A%0ATotal: $${total.toFixed(2)}%0A%0AGracias.`;
+            window.open(`https://wa.me/5930989218315?text=${mensaje}`, '_blank');
+        }
     </script>
 </body>
 </html>
