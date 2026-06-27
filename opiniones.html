@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opiniones Star Ec ✨</title>
+    <title>Opiniones Star Ec</title>
     
-    <!-- NUEVO LOGO como favicon -->
     <link rel="icon" type="image/x-icon" href="https://i.pinimg.com/736x/bc/14/5d/bc145d6d04b34c1d6e597726e444dd53.jpg">
     <link rel="apple-touch-icon" href="https://i.pinimg.com/736x/bc/14/5d/bc145d6d04b34c1d6e597726e444dd53.jpg">
     
@@ -46,6 +45,9 @@
         body {
             font-family: 'Raleway', sans-serif;
             background-color: var(--blanco-roto);
+            background-image: radial-gradient(circle, #c4a882 1.5px, transparent 1.5px);
+            background-size: 28px 28px;
+            background-attachment: fixed;
             color: var(--texto-oscuro);
             overflow-x: hidden;
             line-height: 1.6;
@@ -68,7 +70,6 @@
             border-radius: 10px;
         }
         
-        /* HEADER */
         header {
             position: fixed;
             top: 0;
@@ -79,7 +80,7 @@
             justify-content: space-between;
             align-items: center;
             z-index: 10000;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
             box-shadow: 0 1px 20px rgba(74, 47, 29, 0.05);
@@ -92,7 +93,6 @@
             box-shadow: 0 4px 25px rgba(74, 47, 29, 0.08);
         }
         
-        /* NUEVO LOGO */
         .logo-img {
             width: 50px;
             height: 50px;
@@ -146,45 +146,13 @@
             width: 100%;
         }
         
-        /* HERO DE OPINIONES */
         .opiniones-hero {
             margin-top: 80px;
             padding: 65px 10% 50px;
             text-align: center;
-            background: linear-gradient(180deg, var(--celeste-claro) 0%, var(--celeste-suave) 100%);
+            background: transparent;
             position: relative;
             overflow: hidden;
-        }
-        
-        .opiniones-hero::before {
-            content: '';
-            position: absolute;
-            top: -80px;
-            right: -60px;
-            width: 260px;
-            height: 260px;
-            background: var(--celeste);
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: floatSlow 7s ease-in-out infinite;
-        }
-        
-        .opiniones-hero::after {
-            content: '';
-            position: absolute;
-            bottom: -50px;
-            left: -50px;
-            width: 200px;
-            height: 200px;
-            background: var(--celeste);
-            border-radius: 50%;
-            opacity: 0.25;
-            animation: floatSlow 9s ease-in-out infinite reverse;
-        }
-        
-        @keyframes floatSlow {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(-20px, -15px) scale(1.06); }
         }
         
         .opiniones-hero h1 {
@@ -204,7 +172,7 @@
             margin: 0 auto;
             position: relative;
             z-index: 2;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.9);
             padding: 12px 30px;
             border-radius: 50px;
             backdrop-filter: blur(8px);
@@ -212,7 +180,6 @@
             display: inline-block;
         }
         
-        /* CONTENEDOR PRINCIPAL */
         .opiniones-container {
             padding: 50px 6%;
             max-width: 1400px;
@@ -222,7 +189,6 @@
             gap: 40px;
         }
         
-        /* FORMULARIO */
         .formulario-section {
             background: var(--blanco);
             border-radius: var(--borde-redondo);
@@ -299,7 +265,6 @@
             background: white;
         }
         
-        /* SISTEMA DE ESTRELLAS */
         .rating-stars {
             display: flex;
             gap: 6px;
@@ -328,7 +293,6 @@
             color: var(--marron-claro);
         }
         
-        /* FILE UPLOAD */
         .file-upload-label {
             display: flex;
             align-items: center;
@@ -387,7 +351,6 @@
             display: block;
         }
         
-        /* BOTÓN DE ENVÍO */
         .submit-btn {
             width: 100%;
             padding: 16px 28px;
@@ -416,7 +379,6 @@
             transform: none;
         }
         
-        /* MENSAJES */
         .message {
             padding: 14px 18px;
             border-radius: 16px;
@@ -449,7 +411,6 @@
             border: 1px solid #f0c8c8;
         }
         
-        /* LISTA DE OPINIONES */
         .lista-section {
             background: var(--blanco);
             border-radius: var(--borde-redondo);
@@ -604,7 +565,6 @@
             50% { transform: translateY(-6px); }
         }
         
-        /* MODAL */
         .modal {
             display: none;
             position: fixed;
@@ -658,7 +618,6 @@
             transform: scale(1.15) rotate(90deg);
         }
         
-        /* BOTÓN FLOTANTE */
         .floating-btn {
             position: fixed;
             bottom: 28px;
@@ -722,7 +681,6 @@
 <body>
     <header id="header">
         <a href="index.html">
-            <!-- NUEVO LOGO -->
             <img src="https://i.pinimg.com/736x/bc/14/5d/bc145d6d04b34c1d6e597726e444dd53.jpg" alt="Star Ec Logo" class="logo-img">
         </a>
         
@@ -736,22 +694,22 @@
     </header>
     
     <section class="opiniones-hero" data-aos="fade-down">
-        <h1>✨ Opiniones ✨</h1>
+        <h1>Opiniones</h1>
         <p>Comparte tu experiencia con Star Ec</p>
     </section>
     
     <div class="opiniones-container">
         <div class="formulario-section" data-aos="fade-right">
-            <h2>Deja tu opinión</h2>
+            <h2>Deja tu opinion</h2>
             
             <form id="opinionForm">
                 <div class="form-group">
                     <label for="nombre"><i class="fa-regular fa-user"></i> Tu nombre</label>
-                    <input type="text" id="nombre" name="nombre" placeholder="Ej: María González" required>
+                    <input type="text" id="nombre" name="nombre" placeholder="Ej: Maria Gonzalez" required>
                 </div>
                 
                 <div class="form-group">
-                    <label><i class="fa-regular fa-star"></i> Tu calificación</label>
+                    <label><i class="fa-regular fa-star"></i> Tu calificacion</label>
                     <div class="rating-stars" id="ratingStars">
                         <i class="fa-regular fa-star" data-rating="1"></i>
                         <i class="fa-regular fa-star" data-rating="2"></i>
@@ -763,8 +721,8 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="comentario"><i class="fa-regular fa-message"></i> Tu opinión</label>
-                    <textarea id="comentario" name="comentario" rows="4" placeholder="Cuéntanos qué te parecieron nuestros alfajores..." required></textarea>
+                    <label for="comentario"><i class="fa-regular fa-message"></i> Tu opinion</label>
+                    <textarea id="comentario" name="comentario" rows="4" placeholder="Cuentanos que te parecieron nuestros alfajores..." required></textarea>
                 </div>
                 
                 <div class="form-group">
@@ -776,7 +734,7 @@
                         </label>
                         <input type="file" id="imagen" name="imagen" accept="image/*">
                         <div class="file-name" id="fileName">
-                            <span>Ningún archivo seleccionado</span>
+                            <span>Ningun archivo seleccionado</span>
                         </div>
                     </div>
                     <div class="image-preview" id="imagePreview">
@@ -785,7 +743,7 @@
                 </div>
                 
                 <button type="submit" class="submit-btn" id="submitBtn">
-                    <i class="fa-regular fa-paper-plane"></i> Publicar opinión
+                    <i class="fa-regular fa-paper-plane"></i> Publicar opinion
                 </button>
                 
                 <div class="message" id="message"></div>
@@ -878,7 +836,7 @@
                 reader.readAsDataURL(file);
             } else {
                 selectedFile = null;
-                fileName.textContent = 'Ningún archivo seleccionado';
+                fileName.textContent = 'Ningun archivo seleccionado';
                 imagePreview.classList.remove('show');
             }
         });
@@ -891,7 +849,7 @@
             e.preventDefault();
             
             if (currentRating === 0) {
-                showMessage('Por favor selecciona una calificación', 'error');
+                showMessage('Por favor selecciona una calificacion', 'error');
                 return;
             }
             
@@ -936,22 +894,22 @@
                 
                 if (error) throw error;
                 
-                showMessage('¡Gracias por tu opinión!', 'success');
+                showMessage('Gracias por tu opinion!', 'success');
                 form.reset();
                 currentRating = 0;
                 highlightStars(0);
                 selectedFile = null;
-                fileName.textContent = 'Ningún archivo seleccionado';
+                fileName.textContent = 'Ningun archivo seleccionado';
                 imagePreview.classList.remove('show');
                 
                 cargarOpiniones();
                 
             } catch (error) {
                 console.error('Error:', error);
-                showMessage('Hubo un error al publicar tu opinión. Intenta de nuevo.', 'error');
+                showMessage('Hubo un error al publicar tu opinion. Intenta de nuevo.', 'error');
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fa-regular fa-paper-plane"></i> Publicar opinión';
+                submitBtn.innerHTML = '<i class="fa-regular fa-paper-plane"></i> Publicar opinion';
             }
         });
         
@@ -975,7 +933,7 @@
                     opinionesList.innerHTML = `
                         <div class="no-opiniones">
                             <i class="fa-regular fa-heart"></i>
-                            <p>No hay opiniones todavía. ¡Sé la primera!</p>
+                            <p>No hay opiniones todavia. Se la primera!</p>
                         </div>`;
                     return;
                 }
@@ -993,7 +951,7 @@
                         <p class="opinion-texto">${op.comentario}</p>
                         ${op.imagen_url ? `
                             <div class="opinion-imagen" onclick="abrirModal('${op.imagen_url}')">
-                                <img src="${op.imagen_url}" alt="Foto de opinión">
+                                <img src="${op.imagen_url}" alt="Foto de opinion">
                             </div>` : ''}
                     </div>
                 `).join('');
