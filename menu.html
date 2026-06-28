@@ -46,6 +46,7 @@
             color: var(--texto-oscuro);
             overflow-x: hidden;
             line-height: 1.6;
+            padding-bottom: 100px;
         }
         
         h1, h2, h3 {
@@ -460,6 +461,7 @@
             width: 380px;
             max-width: 90vw;
             height: 100vh;
+            height: 100dvh;
             background: white;
             z-index: 2001;
             box-shadow: -5px 0 30px rgba(0,0,0,0.15);
@@ -479,6 +481,7 @@
             align-items: center;
             padding: 20px 24px;
             border-bottom: 1px solid #f0e8dc;
+            flex-shrink: 0;
         }
 
         .carrito-header h3 {
@@ -493,6 +496,7 @@
             color: var(--marron);
             cursor: pointer;
             transition: var(--transicion);
+            padding: 8px;
         }
 
         .carrito-cerrar:hover {
@@ -503,6 +507,7 @@
             flex: 1;
             overflow-y: auto;
             padding: 20px 24px;
+            -webkit-overflow-scrolling: touch;
         }
 
         .carrito-vacio-panel {
@@ -542,10 +547,10 @@
         .carrito-item-panel .qty-btn {
             background: white;
             border: 1px solid var(--celeste);
-            width: 26px;
-            height: 26px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 700;
             color: var(--marron);
             cursor: pointer;
@@ -553,6 +558,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
         }
 
         .carrito-item-panel .qty-num {
@@ -570,7 +577,10 @@
 
         .carrito-footer {
             padding: 20px 24px;
+            padding-bottom: max(20px, env(safe-area-inset-bottom, 20px));
             border-top: 1px solid #f0e8dc;
+            background: white;
+            flex-shrink: 0;
         }
 
         .carrito-total-panel {
@@ -588,17 +598,21 @@
             justify-content: center;
             gap: 8px;
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             background: #25D366;
             color: white;
             border: none;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 15px;
+            font-size: 16px;
             cursor: pointer;
             transition: var(--transicion);
             font-family: 'Quicksand', sans-serif;
             box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+            -webkit-tap-highlight-color: transparent;
+            position: relative;
+            z-index: 10;
+            margin-top: 4px;
         }
 
         .btn-pedir-panel:hover {
@@ -611,6 +625,10 @@
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
+        }
+
+        .btn-pedir-panel:active {
+            transform: scale(0.97);
         }
 
         /* ========== MEDIA QUERIES RESPONSIVE ========== */
@@ -649,6 +667,10 @@
         
         /* Tablets */
         @media (max-width: 768px) {
+            body {
+                padding-bottom: 90px;
+            }
+            
             header {
                 padding: 12px 5%;
             }
@@ -713,7 +735,7 @@
             
             .btn-agregar {
                 font-size: 13px;
-                padding: 10px 16px;
+                padding: 12px 16px;
             }
             
             .menu-item-badge {
@@ -736,10 +758,25 @@
                 max-width: 100vw;
                 right: -100vw;
             }
+            
+            .carrito-footer {
+                padding: 16px 20px;
+                padding-bottom: max(16px, env(safe-area-inset-bottom, 16px));
+            }
+            
+            .btn-pedir-panel {
+                padding: 16px;
+                font-size: 16px;
+                margin-top: 6px;
+            }
         }
         
         /* Teléfonos Grandes */
         @media (max-width: 480px) {
+            body {
+                padding-bottom: 80px;
+            }
+            
             header {
                 padding: 10px 4%;
             }
@@ -800,7 +837,7 @@
             
             .btn-agregar {
                 font-size: 13px;
-                padding: 10px 14px;
+                padding: 12px 14px;
             }
             
             .carrito-float {
@@ -809,6 +846,10 @@
                 width: 50px;
                 height: 50px;
                 font-size: 20px;
+            }
+            
+            .carrito-header {
+                padding: 16px 20px;
             }
             
             .carrito-header h3 {
@@ -820,27 +861,58 @@
             }
             
             .carrito-footer {
-                padding: 16px;
+                padding: 16px 20px;
+                padding-bottom: max(16px, env(safe-area-inset-bottom, 16px));
             }
             
             .carrito-item-panel {
-                padding: 10px 12px;
-                flex-direction: column;
-                align-items: stretch;
-                text-align: center;
+                padding: 12px 14px;
+                flex-direction: row;
+                align-items: center;
+                text-align: left;
+                gap: 10px;
             }
             
             .carrito-item-panel .item-nombre {
                 font-size: 13px;
+                flex: 2;
             }
             
             .carrito-item-panel .qty-control {
                 justify-content: center;
+                flex: 1;
+            }
+            
+            .carrito-item-panel .qty-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+            }
+            
+            .carrito-item-panel .item-subtotal {
+                flex: 1;
+                text-align: right;
+            }
+            
+            .btn-pedir-panel {
+                padding: 18px;
+                font-size: 16px;
+                margin-top: 8px;
+                min-height: 56px;
+            }
+            
+            .carrito-total-panel {
+                font-size: 18px;
+                margin-bottom: 14px;
             }
         }
         
         /* Teléfonos Pequeños */
         @media (max-width: 360px) {
+            body {
+                padding-bottom: 70px;
+            }
+            
             .menu-hero h1 {
                 font-size: 26px;
             }
@@ -868,7 +940,27 @@
             
             .btn-agregar {
                 font-size: 12px;
-                padding: 8px 12px;
+                padding: 10px 12px;
+            }
+            
+            .carrito-item-panel {
+                padding: 10px 12px;
+                gap: 6px;
+            }
+            
+            .carrito-item-panel .item-nombre {
+                font-size: 12px;
+            }
+            
+            .carrito-item-panel .qty-btn {
+                width: 28px;
+                height: 28px;
+            }
+            
+            .btn-pedir-panel {
+                padding: 16px;
+                font-size: 15px;
+                min-height: 52px;
             }
         }
     </style>
@@ -1208,6 +1300,13 @@
             totalPanel.textContent = `Total: $${total.toFixed(2)}`;
             contador.textContent = totalItems;
             contador.style.display = 'flex';
+            
+            setTimeout(() => {
+                const footer = document.querySelector('.carrito-footer');
+                if (footer) {
+                    footer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }, 100);
         }
 
         function cambiarCantidad(nombre, delta) {
