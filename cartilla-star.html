@@ -832,24 +832,24 @@
     if(!data || !data.length){ showMsg(msgAdminScanner, 'Ese código no corresponde a ningún cliente.', 'error'); return; }
 
     const c = data[0];
+
+    const { data: actualizado, error: errUp } = await supabase.rpc('admin_agregar_estrella', { p_cliente_id: c.id });
+    if(errUp){
+      showMsg(msgAdminScanner, 'No se pudo asignar la estrella: ' + errUp.message, 'error');
+      return;
+    }
+
     cont.innerHTML = `
       <div class="cliente-escaneado">
         <div>
           <h4>${c.nombre}</h4>
-          <p>${c.email} · <span id="scan-estrellas">${c.estrellas}</span> / ${ESTRELLAS_REQUERIDAS} estrellas</p>
+          <p>${c.email} · ${actualizado.estrellas} / ${ESTRELLAS_REQUERIDAS} estrellas</p>
         </div>
-        <button class="btn btn-small" id="btn-scan-sumar"><i class="fas fa-star"></i> +1</button>
+        <i class="fas fa-star" style="color:var(--marron); font-size:1.4rem;"></i>
       </div>
       <button class="btn btn-outline btn-small" id="btn-scan-otro" style="margin-top:12px;">Escanear otro</button>
     `;
-    document.getElementById('btn-scan-sumar').addEventListener('click', async (e)=>{
-      e.target.disabled = true;
-      const { data: actualizado, error: errUp } = await supabase.rpc('admin_agregar_estrella', { p_cliente_id: c.id });
-      if(errUp){ showMsg(msgAdminScanner, 'No se pudo asignar la estrella.', 'error'); e.target.disabled = false; return; }
-      document.getElementById('scan-estrellas').textContent = actualizado.estrellas;
-      showMsg(msgAdminScanner, '¡Estrella asignada a ' + c.nombre + '!', 'ok');
-      e.target.disabled = false;
-    });
+    showMsg(msgAdminScanner, '¡Estrella asignada a ' + c.nombre + '!', 'ok');
     document.getElementById('btn-scan-otro').addEventListener('click', ()=>{
       cont.innerHTML = '';
       hideMsg(msgAdminScanner);
