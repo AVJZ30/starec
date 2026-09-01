@@ -214,6 +214,24 @@
   .producto-item .emoji{ font-size:1.7rem; }
   .producto-item .info h4{ font-size:1rem; font-family:'Cormorant Garamond', serif; color:var(--marron); }
   .producto-item .info p{ font-size:0.78rem; color:var(--texto-medio); font-family:'Raleway', sans-serif; }
+  .producto-img{
+    width:52px; height:52px; border-radius:12px;
+    object-fit:cover; flex-shrink:0;
+    border:1px solid #ede6dc; background:var(--celeste-suave);
+  }
+
+  .admin-producto-row{
+    display:flex; align-items:center; gap:12px;
+    padding:12px; border:1.5px solid #ede6dc; border-radius:16px;
+    margin-bottom:10px;
+  }
+  .admin-producto-img{
+    width:50px; height:50px; border-radius:12px;
+    object-fit:cover; flex-shrink:0;
+    border:1px solid #ede6dc; background:var(--celeste-suave);
+  }
+  .admin-producto-row .datos h4{ font-family:'Cormorant Garamond', serif; font-size:1.02rem; color:var(--marron); }
+  .admin-producto-row .datos p{ font-size:0.76rem; color:var(--texto-medio); font-family:'Quicksand', sans-serif; }
 
   .historial-item{
     display:flex; justify-content:space-between; align-items:center;
@@ -352,6 +370,17 @@
     <button class="btn" id="btn-admin-buscar"><i class="fas fa-search"></i> Buscar</button>
     <div class="msg" id="msg-admin-buscar"></div>
     <div id="resultados-admin" style="margin-top:14px;"></div>
+  </div>
+
+  <div class="card hidden" id="card-admin-productos">
+    <h2><i class="fas fa-gift"></i>Productos canjeables</h2>
+    <div class="msg" id="msg-admin-producto"></div>
+    <label for="p-nombre">Nombre del producto</label>
+    <input id="p-nombre" type="text" placeholder="Ej: Alfajor Clásico">
+    <label for="p-imagen">Link de la imagen</label>
+    <input id="p-imagen" type="url" placeholder="https://ejemplo.com/imagen.jpg">
+    <button class="btn" id="btn-agregar-producto"><i class="fas fa-plus"></i> Agregar producto</button>
+    <div id="lista-admin-productos" style="margin-top:18px;"></div>
   </div>
 
 </div>
@@ -522,7 +551,10 @@
     data.forEach(p=>{
       const item = document.createElement('div');
       item.className = 'producto-item';
-      item.innerHTML = `<div class="emoji">${p.emoji || '🎁'}</div>
+      const imagenHtml = p.imagen_url
+        ? `<img src="${p.imagen_url}" alt="${p.nombre}" class="producto-img" onerror="this.outerHTML='<div class=&quot;emoji&quot;>${p.emoji || '🎁'}</div>'">`
+        : `<div class="emoji">${p.emoji || '🎁'}</div>`;
+      item.innerHTML = `${imagenHtml}
         <div class="info"><h4>${p.nombre}</h4><p>${p.descripcion || ''}</p></div>`;
       item.addEventListener('click', ()=>{
         document.querySelectorAll('.producto-item').forEach(i=>i.classList.remove('selected'));
@@ -576,12 +608,15 @@
   function mostrarPanelAdmin(email){
     document.getElementById('card-admin-login').classList.add('hidden');
     document.getElementById('card-admin-panel').classList.remove('hidden');
+    document.getElementById('card-admin-productos').classList.remove('hidden');
     document.getElementById('admin-user-label').textContent = 'Sesión: ' + email;
+    cargarProductosAdmin();
   }
 
   document.getElementById('btn-admin-logout').addEventListener('click', async ()=>{
     await supabase.auth.signOut();
     document.getElementById('card-admin-panel').classList.add('hidden');
+    document.getElementById('card-admin-productos').classList.add('hidden');
     document.getElementById('card-admin-login').classList.remove('hidden');
     document.getElementById('resultados-admin').innerHTML = '';
     document.getElementById('admin-buscar').value = '';
@@ -633,6 +668,61 @@
       cont.appendChild(row);
     });
   });
+
+  // ---------- ADMIN: gestión de productos canjeables ----------
+  const msgAdminProducto = document.getElementById('msg-admin-producto');
+
+  document.getElementById('btn-agregar-producto').addEventListener('click', async ()=>{
+    hideMsg(msgAdminProducto);
+    const nombre = document.getElementById('p-nombre').value.trim();
+    const imagen = document.getElementById('p-imagen').value.trim();
+    if(!nombre){ showMsg(msgAdminProducto, 'Escribe el nombre del producto.', 'error'); return; }
+    if(!imagen){ showMsg(msgAdminProducto, 'Pega el link de la imagen.', 'error'); return; }
+
+    const { error } = await supabase.rpc('admin_agregar_producto', { p_nombre: nombre, p_imagen_url: imagen, p_descripcion: null });
+    if(error){ showMsg(msgAdminProducto, 'No se pudo agregar: ' + error.message, 'error'); return; }
+
+    showMsg(msgAdminProducto, 'Producto agregado con éxito.', 'ok');
+    document.getElementById('p-nombre').value = '';
+    document.getElementById('p-imagen').value = '';
+    cargarProductosAdmin();
+  });
+
+  async function cargarProductosAdmin(){
+    const cont = document.getElementById('lista-admin-productos');
+    const { data, error } = await supabase.rpc('admin_listar_productos');
+    if(error){ cont.innerHTML = '<p class="empty-state">No se pudieron cargar los productos.</p>'; return; }
+    if(!data || !data.length){ cont.innerHTML = '<p class="empty-state">Aún no has agregado productos.</p>'; return; }
+
+    cont.innerHTML = '';
+    data.forEach(p=>{
+      const row = document.createElement('div');
+      row.className = 'admin-producto-row';
+      row.innerHTML = `
+        <img src="${p.imagen_url || ''}" alt="${p.nombre}" class="admin-producto-img" onerror="this.style.display='none'">
+        <div class="datos" style="flex:1;">
+          <h4>${p.nombre}</h4>
+          <p>${p.activo ? 'Visible para clientes' : 'Oculto'}</p>
+        </div>
+        <button class="btn btn-outline btn-small" data-accion="toggle">${p.activo ? 'Ocultar' : 'Mostrar'}</button>
+        <button class="btn btn-small" data-accion="eliminar" style="background:var(--error);">Eliminar</button>
+      `;
+      row.querySelector('[data-accion="toggle"]').addEventListener('click', async (e)=>{
+        e.target.disabled = true;
+        const { error: errT } = await supabase.rpc('admin_toggle_producto', { p_producto_id: p.id });
+        if(errT){ showMsg(msgAdminProducto, 'No se pudo actualizar.', 'error'); }
+        cargarProductosAdmin();
+      });
+      row.querySelector('[data-accion="eliminar"]').addEventListener('click', async (e)=>{
+        if(!confirm('¿Eliminar "' + p.nombre + '" definitivamente?')) return;
+        e.target.disabled = true;
+        const { error: errD } = await supabase.rpc('admin_eliminar_producto', { p_producto_id: p.id });
+        if(errD){ showMsg(msgAdminProducto, 'No se pudo eliminar.', 'error'); }
+        cargarProductosAdmin();
+      });
+      cont.appendChild(row);
+    });
+  }
 
 })();
 </script>
