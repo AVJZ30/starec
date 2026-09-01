@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Cartilla · Star Ec Alfajores Artesanales</title>
+
+<link rel="icon" type="image/x-icon" href="https://i.pinimg.com/736x/bc/14/5d/bc145d6d04b34c1d6e597726e444dd53.jpg">
+<link rel="apple-touch-icon" href="https://i.pinimg.com/736x/bc/14/5d/bc145d6d04b34c1d6e597726e444dd53.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Raleway:wght@300;400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- ============================================================
+     CONFIGURA AQUÍ TU PROYECTO DE SUPABASE
+     ============================================================ -->
+<script>
+  window.SUPABASE_URL = "https://xhbwlgqlvqqxagpdnsqk.supabase.co";
+  window.SUPABASE_ANON_KEY = "sb_publishable_ZBJnM6qgjsQ1hJrAfVe-KA_5fqQ31Cd";
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+  :root {
+    --celeste: #A8DFF1;
+    --celeste-suave: #d4eef7;
+    --celeste-historia: #A5D8F2;
+    --marron: #4A2F1D;
+    --marron-claro: #6b4a32;
+    --marron-oscuro: #2e1c10;
+    --blanco: #FFFFFF;
+    --blanco-roto: #FFFDF9;
+    --texto-oscuro: #3E2F1C;
+    --texto-medio: #6B5D4A;
+    --ok: #4a7a5a;
+    --error: #b0403a;
+    --sombra-suave: 0 8px 30px rgba(74, 47, 29, 0.08);
+    --borde-redondo: 24px;
+    --transicion: all 0.35s ease;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:'Raleway', sans-serif;
+    background-color: var(--blanco-roto);
+    color: var(--texto-oscuro);
+    line-height:1.6;
+    padding-bottom:60px;
+  }
+  h1,h2,h3,h4 { font-family:'Cormorant Garamond', serif; font-weight:600; letter-spacing:-0.3px; }
+
+  header{
+    padding:18px 6%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background-color: rgba(255,255,255,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom:1px solid var(--celeste);
+  }
+  .logo-group{ display:flex; align-items:center; gap:14px; text-decoration:none; }
+  .logo-img{
+    width:52px; height:52px; border-radius:50%;
+    object-fit:cover; border:2px solid var(--marron);
+    background:white; padding:2px;
+  }
+  .logo-text h1{ font-size:1.4rem; color:var(--marron); line-height:1; }
+  .logo-text span{ font-family:'Quicksand', sans-serif; font-size:0.7rem; color:var(--texto-medio); letter-spacing:0.5px; }
+  .volver-link{
+    font-family:'Quicksand', sans-serif;
+    font-weight:600; font-size:0.85rem;
+    color:var(--marron);
+    text-decoration:none;
+    display:flex; align-items:center; gap:6px;
+  }
+  .volver-link:hover{ color: var(--marron-claro); }
+
+  .tabs{
+    display:flex;
+    max-width:460px;
+    margin:26px auto 0;
+    background:var(--blanco);
+    border-radius:50px;
+    padding:5px;
+    box-shadow: var(--sombra-suave);
+    border:1px solid var(--celeste);
+  }
+  .tab-btn{
+    flex:1; border:none; background:transparent;
+    padding:11px; font-family:'Quicksand', sans-serif;
+    font-weight:700; font-size:0.9rem;
+    color:var(--texto-medio);
+    border-radius:50px; cursor:pointer;
+    transition: var(--transicion);
+  }
+  .tab-btn.active{ background:var(--marron); color:#fff; }
+
+  .view{ display:none; max-width:460px; margin:26px auto; padding:0 20px; }
+  .view.active{ display:block; }
+
+  .badge-top{
+    text-align:center; margin-bottom:18px;
+  }
+  .badge-top span{
+    display:inline-block;
+    background: var(--marron-claro);
+    color:#fff;
+    padding:8px 20px;
+    border-radius:40px;
+    font-family:'Quicksand', sans-serif;
+    font-size:0.72rem;
+    font-weight:700;
+    letter-spacing:1.3px;
+    text-transform:uppercase;
+  }
+
+  .card{
+    background:var(--blanco);
+    border-radius: var(--borde-redondo);
+    padding:28px 26px;
+    box-shadow: var(--sombra-suave);
+    border:1px solid #ede6dc;
+    margin-bottom:22px;
+  }
+  .card h2{ font-size:1.5rem; color:var(--marron); margin-bottom:16px; }
+  .card h2 i{ color:var(--celeste); margin-right:8px; }
+
+  label{
+    font-family:'Quicksand', sans-serif;
+    font-size:0.78rem; font-weight:700;
+    color:var(--texto-medio);
+    display:block; margin-bottom:6px;
+  }
+  input{
+    width:100%;
+    padding:13px 15px;
+    border-radius:14px;
+    border:1.5px solid var(--celeste-suave);
+    margin-bottom:16px;
+    font-size:0.95rem;
+    font-family:'Raleway', sans-serif;
+    background:var(--blanco-roto);
+    color:var(--texto-oscuro);
+  }
+  input:focus{ outline:none; border-color:var(--marron-claro); background:#fff; }
+
+  .btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:50px;
+    background:var(--marron);
+    color:#fff;
+    font-family:'Quicksand', sans-serif;
+    font-weight:700;
+    font-size:0.92rem;
+    letter-spacing:0.5px;
+    cursor:pointer;
+    transition: var(--transicion);
+    display:flex; align-items:center; justify-content:center; gap:8px;
+  }
+  .btn:hover{ background:var(--marron-oscuro); transform:translateY(-2px); }
+  .btn:disabled{ opacity:0.5; cursor:not-allowed; transform:none; }
+  .btn-outline{ background:transparent; border:2px solid var(--marron); color:var(--marron); }
+  .btn-outline:hover{ background:var(--celeste-suave); color:var(--marron); }
+  .btn-small{ width:auto; padding:9px 18px; font-size:0.78rem; border-radius:40px; }
+
+  .stars-row{
+    display:flex; flex-wrap:wrap; gap:11px; justify-content:center;
+    margin:20px 0;
+  }
+  .star-slot{
+    width:44px; height:44px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.3rem;
+    background:var(--celeste-suave);
+    color:var(--celeste);
+    border:2px solid var(--celeste);
+    transition: var(--transicion);
+  }
+  .star-slot.filled{
+    background:var(--marron);
+    color:#F7D9A0;
+    border-color:var(--marron-oscuro);
+    transform:scale(1.05);
+  }
+  .progreso-txt{ text-align:center; font-family:'Quicksand', sans-serif; font-weight:700; color:var(--marron); font-size:1.05rem; margin-bottom:2px; }
+  .progreso-sub{ text-align:center; font-size:0.82rem; color:var(--texto-medio); margin-bottom:8px; }
+
+  .banner-lista{
+    background: var(--celeste-historia);
+    border:1px solid var(--celeste);
+    color:var(--marron);
+    padding:16px;
+    border-radius:16px;
+    text-align:center;
+    font-family:'Quicksand', sans-serif;
+    font-weight:700;
+    margin-bottom:16px;
+  }
+  .banner-lista i{ margin-right:6px; }
+
+  .producto-item{
+    display:flex; align-items:center; gap:14px;
+    padding:14px;
+    border:1.5px solid #ede6dc;
+    border-radius:16px;
+    margin-bottom:10px;
+    cursor:pointer;
+    transition: var(--transicion);
+  }
+  .producto-item.selected{ border-color:var(--marron-claro); background:var(--celeste-suave); }
+  .producto-item .emoji{ font-size:1.7rem; }
+  .producto-item .info h4{ font-size:1rem; font-family:'Cormorant Garamond', serif; color:var(--marron); }
+  .producto-item .info p{ font-size:0.78rem; color:var(--texto-medio); font-family:'Raleway', sans-serif; }
+
+  .historial-item{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:11px 0; border-bottom:1px solid #ede6dc;
+    font-size:0.88rem;
+  }
+  .historial-item:last-child{ border-bottom:none; }
+  .historial-item .fecha{ color:var(--texto-medio); font-size:0.76rem; font-family:'Quicksand', sans-serif; }
+
+  .msg{
+    padding:12px 14px; border-radius:12px; font-size:0.85rem; font-weight:600;
+    margin-bottom:14px; display:none; font-family:'Quicksand', sans-serif;
+  }
+  .msg.show{ display:block; }
+  .msg.ok{ background:#E7F0E9; color:var(--ok); }
+  .msg.error{ background:#F7E6E4; color:var(--error); }
+
+  .resultado-cliente{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:13px; border:1.5px solid #ede6dc; border-radius:16px; margin-bottom:10px;
+  }
+  .resultado-cliente .datos h4{ font-family:'Cormorant Garamond', serif; font-size:1.05rem; color:var(--marron); }
+  .resultado-cliente .datos p{ font-size:0.78rem; color:var(--texto-medio); font-family:'Quicksand', sans-serif; }
+
+  .empty-state{ text-align:center; color:var(--texto-medio); font-size:0.88rem; padding:20px 0; }
+  .hidden{ display:none !important; }
+
+  .top-bar-admin{ display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
+  .top-bar-admin span{ font-family:'Quicksand', sans-serif; font-size:0.82rem; color:var(--texto-medio); }
+  code{ background:var(--celeste-suave); padding:2px 6px; border-radius:6px; }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="#" class="logo-group" id="logo-secreto">
+    <img src="https://i.pinimg.com/736x/bc/14/5d/bc145d6d04b34c1d6e597726e444dd53.jpg" alt="Star Ec" class="logo-img">
+    <div class="logo-text">
+      <h1>Cartilla Star</h1>
+      <span>ALFAJORES ARTESANALES</span>
+    </div>
+  </a>
+  <a href="index.html" class="volver-link"><i class="fas fa-arrow-left"></i> Volver al sitio</a>
+</header>
+
+<div class="badge-top" style="margin-top:26px;">
+  <span>Programa de fidelidad</span>
+</div>
+
+<div class="tabs" id="tabs" style="display:none;">
+  <button class="tab-btn active" data-tab="cliente">Soy cliente</button>
+  <button class="tab-btn" data-tab="admin">Panel admin</button>
+</div>
+
+<!-- ============ VISTA CLIENTE ============ -->
+<div class="view active" id="view-cliente">
+
+  <div class="card" id="card-cliente-auth">
+    <h2><i class="fas fa-lock"></i>Acceder a mi cartilla</h2>
+    <div class="tabs" style="margin:0 0 18px;">
+      <button class="tab-btn active" id="subtab-login" data-subtab="login">Iniciar sesión</button>
+      <button class="tab-btn" id="subtab-registro" data-subtab="registro">Crear cuenta</button>
+    </div>
+    <div class="msg" id="msg-cliente-login"></div>
+
+    <div id="form-login">
+      <label for="c-login-email">Correo electrónico</label>
+      <input id="c-login-email" type="email" placeholder="tucorreo@ejemplo.com">
+      <label for="c-login-pass">Contraseña</label>
+      <input id="c-login-pass" type="password" placeholder="••••••••">
+      <button class="btn" id="btn-cliente-login"><i class="fas fa-right-to-bracket"></i> Iniciar sesión</button>
+    </div>
+
+    <div id="form-registro" class="hidden">
+      <label for="c-reg-nombre">Tu nombre</label>
+      <input id="c-reg-nombre" type="text" placeholder="Ej: María González">
+      <label for="c-reg-email">Correo electrónico</label>
+      <input id="c-reg-email" type="email" placeholder="tucorreo@ejemplo.com">
+      <label for="c-reg-pass">Crea una contraseña</label>
+      <input id="c-reg-pass" type="password" placeholder="Mínimo 6 caracteres">
+      <button class="btn" id="btn-cliente-registro"><i class="fas fa-user-plus"></i> Crear cuenta</button>
+    </div>
+  </div>
+
+  <div class="card hidden" id="card-cartilla">
+    <div class="top-bar-admin">
+      <h2 style="margin:0;"><i class="fas fa-star"></i>Mi cartilla</h2>
+      <button class="btn btn-outline btn-small" id="btn-cliente-logout">Cerrar sesión</button>
+    </div>
+    <p class="progreso-sub" id="cartilla-nombre"></p>
+    <div class="progreso-txt" id="progreso-txt"></div>
+    <div class="stars-row" id="stars-row"></div>
+
+    <div id="zona-premio" class="hidden">
+      <div class="banner-lista"><i class="fas fa-gift"></i> ¡Cartilla completa! Elige tu premio</div>
+      <div id="lista-productos"></div>
+      <button class="btn" id="btn-canjear" disabled><i class="fas fa-check"></i> Canjear premio</button>
+      <div class="msg" id="msg-canje"></div>
+    </div>
+
+    <button class="btn btn-outline" id="btn-ver-historial" style="margin-top:16px;">
+      <i class="fas fa-clock-rotate-left"></i> Ver mi historial de canjes
+    </button>
+    <div id="lista-historial" style="margin-top:14px;"></div>
+  </div>
+
+</div>
+
+<!-- ============ VISTA ADMIN ============ -->
+<div class="view" id="view-admin">
+
+  <div class="card" id="card-admin-login">
+    <h2><i class="fas fa-lock"></i>Acceso administrador</h2>
+    <div class="msg" id="msg-admin-login"></div>
+    <label for="a-email">Correo del administrador</label>
+    <input id="a-email" type="email" placeholder="admin@starec.com">
+    <label for="a-pass">Contraseña</label>
+    <input id="a-pass" type="password" placeholder="••••••••">
+    <button class="btn" id="btn-admin-login"><i class="fas fa-right-to-bracket"></i> Ingresar</button>
+    <p style="font-size:0.75rem; color:var(--texto-medio); margin-top:12px;">
+      El usuario administrador se crea desde el panel de Supabase (Authentication) y debe registrarse en la tabla <code>admins</code>.
+    </p>
+  </div>
+
+  <div class="card hidden" id="card-admin-panel">
+    <div class="top-bar-admin">
+      <span id="admin-user-label"></span>
+      <button class="btn btn-outline btn-small" id="btn-admin-logout">Cerrar sesión</button>
+    </div>
+    <h2><i class="fas fa-magnifying-glass"></i>Buscar cliente</h2>
+    <input id="admin-buscar" type="text" placeholder="Buscar por correo electrónico">
+    <button class="btn" id="btn-admin-buscar"><i class="fas fa-search"></i> Buscar</button>
+    <div class="msg" id="msg-admin-buscar"></div>
+    <div id="resultados-admin" style="margin-top:14px;"></div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  const supabase = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+  let ESTRELLAS_REQUERIDAS = 8;
+  let clienteActual = null;
+  let productoSeleccionado = null;
+
+  function showMsg(el, text, type){ el.textContent = text; el.className = 'msg show ' + type; }
+  function hideMsg(el){ el.className = 'msg'; }
+
+  // ---------- acceso oculto al panel admin ----------
+  function activarAcceso(){
+    document.getElementById('tabs').style.display = 'flex';
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+    document.querySelector('.tab-btn[data-tab="admin"]').classList.add('active');
+    document.getElementById('view-admin').classList.add('active');
+  }
+  if(new URLSearchParams(window.location.search).has('admin')){ activarAcceso(); }
+  let toques = 0, ultimoToque = 0;
+  document.getElementById('logo-secreto').addEventListener('click', (e)=>{
+    e.preventDefault();
+    const ahora = Date.now();
+    toques = (ahora - ultimoToque < 800) ? toques + 1 : 1;
+    ultimoToque = ahora;
+    if(toques >= 2){ toques = 0; activarAcceso(); }
+  });
+
+  // ---------- tabs ----------
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('view-'+btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  // ---------- cargar configuración ----------
+  async function cargarConfig(){
+    const { data } = await supabase.from('configuracion').select('estrellas_requeridas').eq('id',1).single();
+    if(data) ESTRELLAS_REQUERIDAS = data.estrellas_requeridas;
+  }
+  cargarConfig();
+
+  // ---------- CLIENTE: sub-tabs login / registro ----------
+  const msgClienteLogin = document.getElementById('msg-cliente-login');
+  document.getElementById('subtab-login').addEventListener('click', ()=>{
+    document.getElementById('subtab-login').classList.add('active');
+    document.getElementById('subtab-registro').classList.remove('active');
+    document.getElementById('form-login').classList.remove('hidden');
+    document.getElementById('form-registro').classList.add('hidden');
+    hideMsg(msgClienteLogin);
+  });
+  document.getElementById('subtab-registro').addEventListener('click', ()=>{
+    document.getElementById('subtab-registro').classList.add('active');
+    document.getElementById('subtab-login').classList.remove('active');
+    document.getElementById('form-registro').classList.remove('hidden');
+    document.getElementById('form-login').classList.add('hidden');
+    hideMsg(msgClienteLogin);
+  });
+
+  // ---------- CLIENTE: iniciar sesión ----------
+  document.getElementById('btn-cliente-login').addEventListener('click', async ()=>{
+    hideMsg(msgClienteLogin);
+    const email = document.getElementById('c-login-email').value.trim();
+    const pass = document.getElementById('c-login-pass').value;
+    if(!email || !pass){ showMsg(msgClienteLogin, 'Completa tu correo y contraseña.', 'error'); return; }
+
+    const { error } = await supabase.auth.signInWithPassword({ email, password: pass });
+    if(error){ showMsg(msgClienteLogin, 'Correo o contraseña incorrectos.', 'error'); return; }
+
+    await cargarCartillaCliente();
+  });
+
+  // ---------- CLIENTE: crear cuenta ----------
+  document.getElementById('btn-cliente-registro').addEventListener('click', async ()=>{
+    hideMsg(msgClienteLogin);
+    const nombre = document.getElementById('c-reg-nombre').value.trim();
+    const email = document.getElementById('c-reg-email').value.trim();
+    const pass = document.getElementById('c-reg-pass').value;
+    if(!nombre || !email || !pass){ showMsg(msgClienteLogin, 'Completa todos los campos.', 'error'); return; }
+    if(pass.length < 6){ showMsg(msgClienteLogin, 'La contraseña debe tener al menos 6 caracteres.', 'error'); return; }
+
+    const { data, error } = await supabase.auth.signUp({
+      email, password: pass, options: { data: { nombre } }
+    });
+    if(error){ showMsg(msgClienteLogin, error.message, 'error'); return; }
+
+    if(!data.session){
+      showMsg(msgClienteLogin, 'Cuenta creada. Revisa tu correo para confirmarla y luego inicia sesión.', 'ok');
+      document.getElementById('subtab-login').click();
+      return;
+    }
+
+    const { error: errReg } = await supabase.rpc('registrar_cliente_actual', { p_nombre: nombre });
+    if(errReg){ showMsg(msgClienteLogin, 'No se pudo crear tu cartilla: ' + errReg.message, 'error'); return; }
+
+    await cargarCartillaCliente();
+  });
+
+  // ---------- CLIENTE: cargar y mostrar cartilla ----------
+  async function cargarCartillaCliente(){
+    let { data: cartilla, error } = await supabase.rpc('obtener_cartilla');
+    if((!cartilla || !cartilla.length) && !error){
+      const { data: sesion } = await supabase.auth.getUser();
+      const nombre = (sesion && sesion.user && sesion.user.user_metadata && sesion.user.user_metadata.nombre) || 'Cliente';
+      await supabase.rpc('registrar_cliente_actual', { p_nombre: nombre });
+      ({ data: cartilla, error } = await supabase.rpc('obtener_cartilla'));
+    }
+    if(error || !cartilla || !cartilla.length){
+      showMsg(msgClienteLogin, 'No se pudo cargar tu cartilla.', 'error');
+      return;
+    }
+    clienteActual = cartilla[0];
+    ESTRELLAS_REQUERIDAS = clienteActual.estrellas_requeridas;
+    renderCartilla();
+    document.getElementById('card-cliente-auth').classList.add('hidden');
+    document.getElementById('card-cartilla').classList.remove('hidden');
+    document.getElementById('lista-historial').innerHTML = '';
+  }
+
+  document.getElementById('btn-cliente-logout').addEventListener('click', async ()=>{
+    await supabase.auth.signOut();
+    clienteActual = null;
+    document.getElementById('card-cartilla').classList.add('hidden');
+    document.getElementById('card-cliente-auth').classList.remove('hidden');
+    document.getElementById('c-login-email').value = '';
+    document.getElementById('c-login-pass').value = '';
+  });
+
+  function renderCartilla(){
+    document.getElementById('cartilla-nombre').textContent = clienteActual.nombre + ' · ' + clienteActual.email;
+    document.getElementById('progreso-txt').textContent = clienteActual.estrellas + ' / ' + ESTRELLAS_REQUERIDAS + ' estrellas';
+
+    const row = document.getElementById('stars-row');
+    row.innerHTML = '';
+    for(let i=1; i<=ESTRELLAS_REQUERIDAS; i++){
+      const slot = document.createElement('div');
+      slot.className = 'star-slot' + (i <= clienteActual.estrellas ? ' filled' : '');
+      slot.innerHTML = '<i class="fas fa-star"></i>';
+      row.appendChild(slot);
+    }
+
+    const zonaPremio = document.getElementById('zona-premio');
+    if(clienteActual.estrellas >= ESTRELLAS_REQUERIDAS){
+      zonaPremio.classList.remove('hidden');
+      cargarProductos();
+    } else {
+      zonaPremio.classList.add('hidden');
+    }
+  }
+
+  async function cargarProductos(){
+    const { data, error } = await supabase.from('productos_canje').select('*').eq('activo', true).order('nombre');
+    const cont = document.getElementById('lista-productos');
+    cont.innerHTML = '';
+    productoSeleccionado = null;
+    document.getElementById('btn-canjear').disabled = true;
+    if(error || !data || !data.length){
+      cont.innerHTML = '<p class="empty-state">No hay premios disponibles por ahora.</p>';
+      return;
+    }
+    data.forEach(p=>{
+      const item = document.createElement('div');
+      item.className = 'producto-item';
+      item.innerHTML = `<div class="emoji">${p.emoji || '🎁'}</div>
+        <div class="info"><h4>${p.nombre}</h4><p>${p.descripcion || ''}</p></div>`;
+      item.addEventListener('click', ()=>{
+        document.querySelectorAll('.producto-item').forEach(i=>i.classList.remove('selected'));
+        item.classList.add('selected');
+        productoSeleccionado = p.id;
+        document.getElementById('btn-canjear').disabled = false;
+      });
+      cont.appendChild(item);
+    });
+  }
+
+  const msgCanje = document.getElementById('msg-canje');
+  document.getElementById('btn-canjear').addEventListener('click', async ()=>{
+    hideMsg(msgCanje);
+    if(!productoSeleccionado || !clienteActual) return;
+    const { data, error } = await supabase.rpc('canjear_premio', { p_producto_id: productoSeleccionado });
+    if(error || !data || !data.length || !data[0].ok){
+      showMsg(msgCanje, (data && data[0] && data[0].mensaje) || (error && error.message) || 'No se pudo canjear.', 'error');
+      return;
+    }
+    showMsg(msgCanje, '¡Premio canjeado! Tu cartilla se reinició.', 'ok');
+    const { data: cartilla } = await supabase.rpc('obtener_cartilla');
+    if(cartilla && cartilla.length) clienteActual = cartilla[0];
+    renderCartilla();
+  });
+
+  document.getElementById('btn-ver-historial').addEventListener('click', async ()=>{
+    if(!clienteActual) return;
+    const { data, error } = await supabase.rpc('obtener_historial');
+    const cont = document.getElementById('lista-historial');
+    if(error){ cont.innerHTML = '<p class="empty-state">No se pudo cargar el historial.</p>'; return; }
+    if(!data || !data.length){ cont.innerHTML = '<p class="empty-state">Aún no has canjeado premios.</p>'; return; }
+    cont.innerHTML = data.map(h=>{
+      const f = new Date(h.fecha);
+      return `<div class="historial-item"><span>${h.producto_nombre}</span><span class="fecha">${f.toLocaleDateString()}</span></div>`;
+    }).join('');
+  });
+
+  // ---------- ADMIN: login ----------
+  const msgAdminLogin = document.getElementById('msg-admin-login');
+  document.getElementById('btn-admin-login').addEventListener('click', async ()=>{
+    hideMsg(msgAdminLogin);
+    const email = document.getElementById('a-email').value.trim();
+    const pass = document.getElementById('a-pass').value;
+    if(!email || !pass){ showMsg(msgAdminLogin, 'Completa correo y contraseña.', 'error'); return; }
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password: pass });
+    if(error){ showMsg(msgAdminLogin, 'Credenciales inválidas.', 'error'); return; }
+    mostrarPanelAdmin(data.user.email);
+  });
+
+  function mostrarPanelAdmin(email){
+    document.getElementById('card-admin-login').classList.add('hidden');
+    document.getElementById('card-admin-panel').classList.remove('hidden');
+    document.getElementById('admin-user-label').textContent = 'Sesión: ' + email;
+  }
+
+  document.getElementById('btn-admin-logout').addEventListener('click', async ()=>{
+    await supabase.auth.signOut();
+    document.getElementById('card-admin-panel').classList.add('hidden');
+    document.getElementById('card-admin-login').classList.remove('hidden');
+    document.getElementById('resultados-admin').innerHTML = '';
+    document.getElementById('admin-buscar').value = '';
+  });
+
+  // ---------- restaurar sesión existente (cliente o admin) ----------
+  (async ()=>{
+    const { data } = await supabase.auth.getSession();
+    if(!data || !data.session) return;
+    const { data: esAdmin } = await supabase.rpc('es_admin');
+    if(esAdmin){
+      mostrarPanelAdmin(data.session.user.email);
+    } else {
+      await cargarCartillaCliente();
+    }
+  })();
+
+  // ---------- ADMIN: buscar y asignar estrellas ----------
+  const msgAdminBuscar = document.getElementById('msg-admin-buscar');
+  document.getElementById('btn-admin-buscar').addEventListener('click', async ()=>{
+    hideMsg(msgAdminBuscar);
+    const q = document.getElementById('admin-buscar').value.trim();
+    const cont = document.getElementById('resultados-admin');
+    cont.innerHTML = '';
+    if(!q){ showMsg(msgAdminBuscar, 'Escribe un correo o parte de él.', 'error'); return; }
+
+    const { data, error } = await supabase.rpc('admin_buscar_cliente', { p_email: q });
+    if(error){ showMsg(msgAdminBuscar, 'Error al buscar: ' + error.message, 'error'); return; }
+    if(!data || !data.length){ cont.innerHTML = '<p class="empty-state">No se encontraron clientes.</p>'; return; }
+
+    data.forEach(c=>{
+      const row = document.createElement('div');
+      row.className = 'resultado-cliente';
+      row.innerHTML = `
+        <div class="datos">
+          <h4>${c.nombre}</h4>
+          <p>${c.email} · ${c.estrellas} / ${ESTRELLAS_REQUERIDAS} estrellas</p>
+        </div>
+        <button class="btn btn-small" data-id="${c.id}"><i class="fas fa-star"></i> +1</button>
+      `;
+      row.querySelector('button').addEventListener('click', async (e)=>{
+        e.target.disabled = true;
+        const { data: actualizado, error: errUp } = await supabase.rpc('admin_agregar_estrella', { p_cliente_id: c.id });
+        if(errUp){ showMsg(msgAdminBuscar, 'No se pudo asignar la estrella.', 'error'); e.target.disabled = false; return; }
+        c.estrellas = actualizado.estrellas;
+        row.querySelector('p').textContent = c.email + ' · ' + c.estrellas + ' / ' + ESTRELLAS_REQUERIDAS + ' estrellas';
+        e.target.disabled = false;
+      });
+      cont.appendChild(row);
+    });
+  });
+
+})();
+</script>
+</body>
+</html>
