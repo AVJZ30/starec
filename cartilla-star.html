@@ -359,6 +359,10 @@
     <div class="qr-cliente">
       <p class="progreso-sub" style="margin-bottom:8px;">Muestra este código para que te sumen una estrella</p>
       <img id="qr-cliente-img" alt="Mi código QR" class="qr-img">
+      <br>
+      <a id="btn-descargar-qr" class="btn btn-outline btn-small" download="mi-codigo-qr-cartilla-star.png" style="margin-top:12px; display:inline-flex; text-decoration:none;">
+        <i class="fas fa-download"></i> Descargar mi QR
+      </a>
     </div>
 
     <div id="zona-premio" class="hidden">
@@ -572,8 +576,25 @@
     }
 
     const zonaPremio = document.getElementById('zona-premio');
-    document.getElementById('qr-cliente-img').src =
-      'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' + encodeURIComponent(clienteActual.id);
+    const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' + encodeURIComponent(clienteActual.id);
+    document.getElementById('qr-cliente-img').src = qrUrl;
+    document.getElementById('btn-descargar-qr').onclick = async (e)=>{
+      e.preventDefault();
+      try{
+        const resp = await fetch(qrUrl);
+        const blob = await resp.blob();
+        const blobUrl = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = blobUrl;
+        a.download = 'mi-codigo-qr-cartilla-star.png';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(blobUrl);
+      }catch(err){
+        window.open(qrUrl, '_blank');
+      }
+    };
     if(clienteActual.estrellas >= ESTRELLAS_REQUERIDAS){
       zonaPremio.classList.remove('hidden');
       cargarProductos();
@@ -700,18 +721,23 @@
       row.innerHTML = `
         <div class="datos">
           <h4>${c.nombre}</h4>
-          <p>${c.email} · ${c.estrellas} / ${ESTRELLAS_REQUERIDAS} estrellas</p>
+          <p>${c.email} · <span class="span-estrellas">${c.estrellas}</span> / ${ESTRELLAS_REQUERIDAS} estrellas</p>
         </div>
-        <button class="btn btn-small" data-id="${c.id}"><i class="fas fa-star"></i> +1</button>
+        <div style="display:flex; gap:8px;">
+          <button class="btn btn-outline btn-small" data-accion="quitar" data-id="${c.id}"><i class="fas fa-minus"></i></button>
+          <button class="btn btn-small" data-accion="sumar" data-id="${c.id}"><i class="fas fa-star"></i> +1</button>
+        </div>
       `;
-      row.querySelector('button').addEventListener('click', async (e)=>{
-        e.target.disabled = true;
-        const { data: actualizado, error: errUp } = await supabase.rpc('admin_agregar_estrella', { p_cliente_id: c.id });
-        if(errUp){ showMsg(msgAdminBuscar, 'No se pudo asignar la estrella.', 'error'); e.target.disabled = false; return; }
+      async function actualizarEstrellas(rpcName, boton){
+        boton.disabled = true;
+        const { data: actualizado, error: errUp } = await supabase.rpc(rpcName, { p_cliente_id: c.id });
+        if(errUp){ showMsg(msgAdminBuscar, 'No se pudo actualizar.', 'error'); boton.disabled = false; return; }
         c.estrellas = actualizado.estrellas;
-        row.querySelector('p').textContent = c.email + ' · ' + c.estrellas + ' / ' + ESTRELLAS_REQUERIDAS + ' estrellas';
-        e.target.disabled = false;
-      });
+        row.querySelector('.span-estrellas').textContent = c.estrellas;
+        boton.disabled = false;
+      }
+      row.querySelector('[data-accion="sumar"]').addEventListener('click', (e)=> actualizarEstrellas('admin_agregar_estrella', e.currentTarget));
+      row.querySelector('[data-accion="quitar"]').addEventListener('click', (e)=> actualizarEstrellas('admin_quitar_estrella', e.currentTarget));
       cont.appendChild(row);
     });
   });
