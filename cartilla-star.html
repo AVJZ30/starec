@@ -810,7 +810,9 @@
     hideMsg(msgAdminScanner);
     document.getElementById('resultado-scanner').innerHTML = '';
     try{
-      streamScanner = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+      streamScanner = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: 'environment', width: { ideal: 640 }, height: { ideal: 480 } }
+      });
     }catch(e){
       showMsg(msgAdminScanner, 'No se pudo acceder a la cámara. Revisa los permisos del navegador.', 'error');
       return;
@@ -834,13 +836,16 @@
     document.getElementById('btn-detener-scanner').classList.add('hidden');
   }
 
+  const SCANNER_ANCHO_MAX = 480; // menor resolución de análisis = detección más rápida
+
   function tickScanner(){
     if(videoScanner.readyState === videoScanner.HAVE_ENOUGH_DATA){
-      canvasScanner.width = videoScanner.videoWidth;
-      canvasScanner.height = videoScanner.videoHeight;
+      const escala = Math.min(1, SCANNER_ANCHO_MAX / videoScanner.videoWidth);
+      canvasScanner.width = videoScanner.videoWidth * escala;
+      canvasScanner.height = videoScanner.videoHeight * escala;
       ctxScanner.drawImage(videoScanner, 0, 0, canvasScanner.width, canvasScanner.height);
       const imageData = ctxScanner.getImageData(0, 0, canvasScanner.width, canvasScanner.height);
-      const codigo = jsQR(imageData.data, imageData.width, imageData.height);
+      const codigo = jsQR(imageData.data, imageData.width, imageData.height, { inversionAttempts: 'dontInvert' });
       if(codigo && UUID_REGEX.test(codigo.data.trim())){
         detenerScanner();
         buscarClientePorQR(codigo.data.trim());
