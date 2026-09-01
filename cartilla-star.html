@@ -18,7 +18,7 @@
      ============================================================ -->
 <script>
   window.SUPABASE_URL = "https://xhbwlgqlvqqxagpdnsqk.supabase.co";
-  window.SUPABASE_ANON_KEY = "sb_publishable_ZBJnM6qgjsQ1hJrAfVe-KA_5fqQ31Cd";
+  window.SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhoYndsZ3FsdnFxeGFncGRuc3FrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5Nzg5NTEsImV4cCI6MjA4NzU1NDk1MX0.9K6JPZ205aM9u0zCDDriw1y6MQy2bhhOCdTECFNa1Ig";
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -462,11 +462,12 @@
     if((!cartilla || !cartilla.length) && !error){
       const { data: sesion } = await supabase.auth.getUser();
       const nombre = (sesion && sesion.user && sesion.user.user_metadata && sesion.user.user_metadata.nombre) || 'Cliente';
-      await supabase.rpc('registrar_cliente_actual', { p_nombre: nombre });
-      ({ data: cartilla, error } = await supabase.rpc('obtener_cartilla'));
+      const { error: errAuto } = await supabase.rpc('registrar_cliente_actual', { p_nombre: nombre });
+      if(errAuto){ error = errAuto; }
+      else { ({ data: cartilla, error } = await supabase.rpc('obtener_cartilla')); }
     }
     if(error || !cartilla || !cartilla.length){
-      showMsg(msgClienteLogin, 'No se pudo cargar tu cartilla.', 'error');
+      showMsg(msgClienteLogin, 'No se pudo cargar tu cartilla' + (error ? (': ' + error.message) : '') + '.', 'error');
       return;
     }
     clienteActual = cartilla[0];
