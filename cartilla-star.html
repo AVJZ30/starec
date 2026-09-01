@@ -273,21 +273,9 @@
 
   <div class="card" id="card-cliente-auth">
     <h2><i class="fas fa-lock"></i>Acceder a mi cartilla</h2>
-    <div class="tabs" style="margin:0 0 18px;">
-      <button class="tab-btn active" id="subtab-login" data-subtab="login">Iniciar sesión</button>
-      <button class="tab-btn" id="subtab-registro" data-subtab="registro">Crear cuenta</button>
-    </div>
     <div class="msg" id="msg-cliente-login"></div>
 
-    <div id="form-login">
-      <label for="c-login-email">Correo electrónico</label>
-      <input id="c-login-email" type="email" placeholder="tucorreo@ejemplo.com">
-      <label for="c-login-pass">Contraseña</label>
-      <input id="c-login-pass" type="password" placeholder="••••••••">
-      <button class="btn" id="btn-cliente-login"><i class="fas fa-right-to-bracket"></i> Iniciar sesión</button>
-    </div>
-
-    <div id="form-registro" class="hidden">
+    <div id="form-registro">
       <label for="c-reg-nombre">Tu nombre</label>
       <input id="c-reg-nombre" type="text" placeholder="Ej: María González">
       <label for="c-reg-email">Correo electrónico</label>
@@ -295,6 +283,22 @@
       <label for="c-reg-pass">Crea una contraseña</label>
       <input id="c-reg-pass" type="password" placeholder="Mínimo 6 caracteres">
       <button class="btn" id="btn-cliente-registro"><i class="fas fa-user-plus"></i> Crear cuenta</button>
+      <p style="text-align:center; font-family:'Quicksand', sans-serif; font-size:0.85rem; color:var(--texto-medio); margin-top:14px;">
+        ¿Ya tienes una cuenta?
+        <a href="#" id="link-ir-login" style="color:var(--marron); font-weight:700; text-decoration:none;">Inicia sesión</a>
+      </p>
+    </div>
+
+    <div id="form-login" class="hidden">
+      <label for="c-login-email">Correo electrónico</label>
+      <input id="c-login-email" type="email" placeholder="tucorreo@ejemplo.com">
+      <label for="c-login-pass">Contraseña</label>
+      <input id="c-login-pass" type="password" placeholder="••••••••">
+      <button class="btn" id="btn-cliente-login"><i class="fas fa-right-to-bracket"></i> Iniciar sesión</button>
+      <p style="text-align:center; font-family:'Quicksand', sans-serif; font-size:0.85rem; color:var(--texto-medio); margin-top:14px;">
+        ¿No tienes cuenta?
+        <a href="#" id="link-ir-registro" style="color:var(--marron); font-weight:700; text-decoration:none;">Crear cuenta</a>
+      </p>
     </div>
   </div>
 
@@ -397,20 +401,18 @@
   }
   cargarConfig();
 
-  // ---------- CLIENTE: sub-tabs login / registro ----------
+  // ---------- CLIENTE: alternar entre crear cuenta / iniciar sesión ----------
   const msgClienteLogin = document.getElementById('msg-cliente-login');
-  document.getElementById('subtab-login').addEventListener('click', ()=>{
-    document.getElementById('subtab-login').classList.add('active');
-    document.getElementById('subtab-registro').classList.remove('active');
-    document.getElementById('form-login').classList.remove('hidden');
+  document.getElementById('link-ir-login').addEventListener('click', (e)=>{
+    e.preventDefault();
     document.getElementById('form-registro').classList.add('hidden');
+    document.getElementById('form-login').classList.remove('hidden');
     hideMsg(msgClienteLogin);
   });
-  document.getElementById('subtab-registro').addEventListener('click', ()=>{
-    document.getElementById('subtab-registro').classList.add('active');
-    document.getElementById('subtab-login').classList.remove('active');
-    document.getElementById('form-registro').classList.remove('hidden');
+  document.getElementById('link-ir-registro').addEventListener('click', (e)=>{
+    e.preventDefault();
     document.getElementById('form-login').classList.add('hidden');
+    document.getElementById('form-registro').classList.remove('hidden');
     hideMsg(msgClienteLogin);
   });
 
@@ -442,8 +444,9 @@
     if(error){ showMsg(msgClienteLogin, error.message, 'error'); return; }
 
     if(!data.session){
+      document.getElementById('form-registro').classList.add('hidden');
+      document.getElementById('form-login').classList.remove('hidden');
       showMsg(msgClienteLogin, 'Cuenta creada. Revisa tu correo para confirmarla y luego inicia sesión.', 'ok');
-      document.getElementById('subtab-login').click();
       return;
     }
 
