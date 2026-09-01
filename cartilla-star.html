@@ -21,6 +21,7 @@
   window.SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhoYndsZ3FsdnFxeGFncGRuc3FrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5Nzg5NTEsImV4cCI6MjA4NzU1NDk1MX0.9K6JPZ205aM9u0zCDDriw1y6MQy2bhhOCdTECFNa1Ig";
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
 
 <style>
   :root {
@@ -259,6 +260,32 @@
   .empty-state{ text-align:center; color:var(--texto-medio); font-size:0.88rem; padding:20px 0; }
   .hidden{ display:none !important; }
 
+  .qr-cliente{ text-align:center; margin:20px 0; }
+  .qr-img{
+    width:170px; height:170px;
+    border-radius:16px;
+    border:2px solid var(--celeste);
+    background:#fff;
+    padding:10px;
+  }
+
+  #video-scanner{
+    width:100%;
+    border-radius:16px;
+    border:2px solid var(--celeste);
+    margin-bottom:14px;
+    display:none;
+    background:#000;
+  }
+  .cliente-escaneado{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px; border:1.5px solid var(--celeste);
+    background:var(--celeste-suave);
+    border-radius:16px; margin-top:6px;
+  }
+  .cliente-escaneado h4{ font-family:'Cormorant Garamond', serif; font-size:1.15rem; color:var(--marron); }
+  .cliente-escaneado p{ font-size:0.8rem; color:var(--texto-medio); font-family:'Quicksand', sans-serif; }
+
   .top-bar-admin{ display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
   .top-bar-admin span{ font-family:'Quicksand', sans-serif; font-size:0.82rem; color:var(--texto-medio); }
   code{ background:var(--celeste-suave); padding:2px 6px; border-radius:6px; }
@@ -329,6 +356,11 @@
     <div class="progreso-txt" id="progreso-txt"></div>
     <div class="stars-row" id="stars-row"></div>
 
+    <div class="qr-cliente">
+      <p class="progreso-sub" style="margin-bottom:8px;">Muestra este código para que te sumen una estrella</p>
+      <img id="qr-cliente-img" alt="Mi código QR" class="qr-img">
+    </div>
+
     <div id="zona-premio" class="hidden">
       <div class="banner-lista"><i class="fas fa-gift"></i> ¡Cartilla completa! Elige tu premio</div>
       <div id="lista-productos"></div>
@@ -358,6 +390,16 @@
     <p style="font-size:0.75rem; color:var(--texto-medio); margin-top:12px;">
       El usuario administrador se crea desde el panel de Supabase (Authentication) y debe registrarse en la tabla <code>admins</code>.
     </p>
+  </div>
+
+  <div class="card hidden" id="card-admin-scanner">
+    <h2><i class="fas fa-qrcode"></i>Escanear QR del cliente</h2>
+    <div class="msg" id="msg-admin-scanner"></div>
+    <video id="video-scanner" playsinline muted></video>
+    <canvas id="canvas-scanner" class="hidden"></canvas>
+    <button class="btn" id="btn-iniciar-scanner"><i class="fas fa-camera"></i> Activar cámara</button>
+    <button class="btn btn-outline hidden" id="btn-detener-scanner" style="margin-top:10px;">Detener cámara</button>
+    <div id="resultado-scanner" style="margin-top:16px;"></div>
   </div>
 
   <div class="card hidden" id="card-admin-panel">
@@ -530,6 +572,8 @@
     }
 
     const zonaPremio = document.getElementById('zona-premio');
+    document.getElementById('qr-cliente-img').src =
+      'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' + encodeURIComponent(clienteActual.id);
     if(clienteActual.estrellas >= ESTRELLAS_REQUERIDAS){
       zonaPremio.classList.remove('hidden');
       cargarProductos();
@@ -607,6 +651,7 @@
 
   function mostrarPanelAdmin(email){
     document.getElementById('card-admin-login').classList.add('hidden');
+    document.getElementById('card-admin-scanner').classList.remove('hidden');
     document.getElementById('card-admin-panel').classList.remove('hidden');
     document.getElementById('card-admin-productos').classList.remove('hidden');
     document.getElementById('admin-user-label').textContent = 'Sesión: ' + email;
@@ -614,9 +659,11 @@
   }
 
   document.getElementById('btn-admin-logout').addEventListener('click', async ()=>{
+    detenerScanner();
     await supabase.auth.signOut();
     document.getElementById('card-admin-panel').classList.add('hidden');
     document.getElementById('card-admin-productos').classList.add('hidden');
+    document.getElementById('card-admin-scanner').classList.add('hidden');
     document.getElementById('card-admin-login').classList.remove('hidden');
     document.getElementById('resultados-admin').innerHTML = '';
     document.getElementById('admin-buscar').value = '';
@@ -721,6 +768,92 @@
         cargarProductosAdmin();
       });
       cont.appendChild(row);
+    });
+  }
+
+  // ---------- ADMIN: escáner de QR ----------
+  const msgAdminScanner = document.getElementById('msg-admin-scanner');
+  const videoScanner = document.getElementById('video-scanner');
+  const canvasScanner = document.getElementById('canvas-scanner');
+  const ctxScanner = canvasScanner.getContext('2d');
+  const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  let streamScanner = null;
+  let animFrameScanner = null;
+
+  document.getElementById('btn-iniciar-scanner').addEventListener('click', async ()=>{
+    hideMsg(msgAdminScanner);
+    document.getElementById('resultado-scanner').innerHTML = '';
+    try{
+      streamScanner = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+    }catch(e){
+      showMsg(msgAdminScanner, 'No se pudo acceder a la cámara. Revisa los permisos del navegador.', 'error');
+      return;
+    }
+    videoScanner.srcObject = streamScanner;
+    videoScanner.style.display = 'block';
+    await videoScanner.play();
+    document.getElementById('btn-iniciar-scanner').classList.add('hidden');
+    document.getElementById('btn-detener-scanner').classList.remove('hidden');
+    animFrameScanner = requestAnimationFrame(tickScanner);
+  });
+
+  document.getElementById('btn-detener-scanner').addEventListener('click', detenerScanner);
+
+  function detenerScanner(){
+    if(animFrameScanner) cancelAnimationFrame(animFrameScanner);
+    animFrameScanner = null;
+    if(streamScanner){ streamScanner.getTracks().forEach(t=>t.stop()); streamScanner = null; }
+    videoScanner.style.display = 'none';
+    document.getElementById('btn-iniciar-scanner').classList.remove('hidden');
+    document.getElementById('btn-detener-scanner').classList.add('hidden');
+  }
+
+  function tickScanner(){
+    if(videoScanner.readyState === videoScanner.HAVE_ENOUGH_DATA){
+      canvasScanner.width = videoScanner.videoWidth;
+      canvasScanner.height = videoScanner.videoHeight;
+      ctxScanner.drawImage(videoScanner, 0, 0, canvasScanner.width, canvasScanner.height);
+      const imageData = ctxScanner.getImageData(0, 0, canvasScanner.width, canvasScanner.height);
+      const codigo = jsQR(imageData.data, imageData.width, imageData.height);
+      if(codigo && UUID_REGEX.test(codigo.data.trim())){
+        detenerScanner();
+        buscarClientePorQR(codigo.data.trim());
+        return;
+      }
+    }
+    animFrameScanner = requestAnimationFrame(tickScanner);
+  }
+
+  async function buscarClientePorQR(clienteId){
+    hideMsg(msgAdminScanner);
+    const { data, error } = await supabase.rpc('admin_obtener_cliente_por_id', { p_cliente_id: clienteId });
+    const cont = document.getElementById('resultado-scanner');
+    if(error){ showMsg(msgAdminScanner, 'Error al buscar: ' + error.message, 'error'); return; }
+    if(!data || !data.length){ showMsg(msgAdminScanner, 'Ese código no corresponde a ningún cliente.', 'error'); return; }
+
+    const c = data[0];
+    cont.innerHTML = `
+      <div class="cliente-escaneado">
+        <div>
+          <h4>${c.nombre}</h4>
+          <p>${c.email} · <span id="scan-estrellas">${c.estrellas}</span> / ${ESTRELLAS_REQUERIDAS} estrellas</p>
+        </div>
+        <button class="btn btn-small" id="btn-scan-sumar"><i class="fas fa-star"></i> +1</button>
+      </div>
+      <button class="btn btn-outline btn-small" id="btn-scan-otro" style="margin-top:12px;">Escanear otro</button>
+    `;
+    document.getElementById('btn-scan-sumar').addEventListener('click', async (e)=>{
+      e.target.disabled = true;
+      const { data: actualizado, error: errUp } = await supabase.rpc('admin_agregar_estrella', { p_cliente_id: c.id });
+      if(errUp){ showMsg(msgAdminScanner, 'No se pudo asignar la estrella.', 'error'); e.target.disabled = false; return; }
+      document.getElementById('scan-estrellas').textContent = actualizado.estrellas;
+      showMsg(msgAdminScanner, '¡Estrella asignada a ' + c.nombre + '!', 'ok');
+      e.target.disabled = false;
+    });
+    document.getElementById('btn-scan-otro').addEventListener('click', ()=>{
+      cont.innerHTML = '';
+      hideMsg(msgAdminScanner);
+      document.getElementById('btn-iniciar-scanner').click();
     });
   }
 
